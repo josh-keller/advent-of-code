@@ -1,0 +1,37 @@
+**** PEDAC *****
+
+INPUT: Slice of integers (representing depth measurements)
+OUTPUT: Integer (representing the number of times two consecutive measurements increase)
+
+RULES:
+- Each time an element at index n + 1 is greater than element at n, this is an increase and should be counted
+- If depth stays the same that doesn't count
+
+EXAMPLES:
+
+DATA STRUCTURES:
+
+**ALGORITHM**
+HIGH-LEVEL STEPS:
+
+COUNT INCREASES:
+init count
+iterate from index 1 to last index
+  grab previous
+  grab current
+  compare if current is greater than previous
+    => increment "increased" count
+return/output increasedCount    
+
+
+CREATE WINDOWS:
+argument: depths []int
+init: windows []int
+
+iterate from i := 0 to (inclusive) last index - 3:
+  sum elements at i, i + 1, i + 2
+  put the sum into a new slice (windows)
+  
+return windows
+
+[1 2 3 4]  -> [6 9]
