@@ -1,0 +1,25 @@
+INPUT: File with called numbers and boards
+OUTPUT: A single number: the sum of all unmarked numbers on the first winning
+board * the last drawn number
+
+High Level Steps:
+1. Read in first line of file and store the numbers in a slice
+2. Read in the rest of the file, store boards in a slice of slices
+   (make a type for boards?)
+3. For each calledNumber in the set of numbers:
+   - For each board:
+     - For each square
+       - Mark the square if the number matches the calledNumber
+       - Then check to see if the board is a winner, if it is:
+         * return the sum of the unmarked squares times the calledNumber
+       - Else, continue
+
+DATA:
+- SQUARE: { number int, marked bool }
+- BOARD: { squares [5][5]int }
+  - Methods:
+    - mark - takes a number and marks the square if the number is present,
+      returns true if it found the number, false otherwise
+    - winner - returns true if a row, column or diagonal are all marked
+    - sum - returns the sum of all unmarked squares
+
