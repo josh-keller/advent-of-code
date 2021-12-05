@@ -37,10 +37,6 @@ func main() {
 		for _, point := range points {
 			increment(&floor, point.x, point.y)
 		}
-
-		// fmt.Println("line: ", line)
-		// fmt.Println("points: ", points)
-		// printFloor(&floor)
 	}
 
 	count := 0
