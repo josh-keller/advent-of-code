@@ -1,0 +1,23 @@
+- "vents" are line segments expressed as x1,y1 -> x2,y2
+- Part 1: only consider vertical and horizontal (i.e. where x1 == x2 or y1 ==
+  y2)
+- 0,0 is top left
+- x <->  y ^v
+
+INPUT: List of lines (x1,y1 -> x2,y2)
+OUTPUT: Number of points in the grid where at least two lines overlap
+
+DATA:
+- List of lines (a line is a pair of points or a list of points)
+- 2d slice of ints indicating the number of vents present at each point
+
+BIG STEPS:
+- Parse the input file:
+  - Split into lines
+  - Make each line of input into a line segment (more on this later)
+- Find the largest x and y values in the list
+- Create a 2d slice of size x-max x y-max, initialize with all 0s
+- Filter the list of lines to include only horizontal and vertical
+- For each line segment, for each point in the segment, increment the point on
+  the 2d array
+- Count the number of points in the 2d slice that have a value > 1
