@@ -1,0 +1,4 @@
+- Read and convert input
+- Sort numbers
+- Calculate median
+- Calculate sum of differences to the median

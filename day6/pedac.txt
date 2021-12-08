@@ -1,0 +1,18 @@
+Latern Fish
+- spawn exponentially
+- each one creates a new one once every 7 days
+- model a fish as a single number (number of days until it creates a new fish)
+- a new lanternfish needs slightly longer (+2 days for first cycle)
+
+INPUT: a list of ints representing the days until a lanternfish spawns (spawns after day 0)
+OUTPUT: the length of the list after 80 days
+
+Take the initial state in an array of ints
+
+For each fish:
+  - If the fish is 0:
+    - reset to 6 and append an 8 on the end
+  - Else:
+    - decrement the fish
+
+

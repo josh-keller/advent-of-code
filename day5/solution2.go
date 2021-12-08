@@ -19,7 +19,7 @@ type line struct {
 
 func main() {
 
-	lines := *readData("input.txt")
+	lines := *readData("sampleInput.txt")
 
 	maxX, maxY := maxCoords(&lines)
 	maxX += 1
@@ -37,6 +37,10 @@ func main() {
 		for _, point := range points {
 			increment(&floor, point.x, point.y)
 		}
+	}
+
+	for _, row := range floor {
+		fmt.Println(row)
 	}
 
 	count := 0

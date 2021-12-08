@@ -1,0 +1,67 @@
+- Input the data:
+  - Split on lines
+  - Then split on |
+  - Then split on spaces
+
+INPUT: Strings (input values (10) | output values (4)) representing numbers
+       (Letters of sections from a 7-segment display)
+OUTPUT: A count of the times 1, 4, 7, 8 appear in the output values
+
+DATA:
+
+type digit struct {
+  raw string
+}
+
+- For the first one all I need is the length of the strings
+
+Num Segments
+0   a,b,c,e,f,g (6)
+1   c, f        (2)
+2   a,c,d,e,g   (5)
+3   a,c,d,f,g   (5)
+4   b,d,c,f     (4)
+5   a,b,d,f,g   (5)
+6   a,b,d,e,f,g (6)
+7   a,c,f       (3)
+8   a,b,c,d,e,f,g (7)
+9   a,b,c,d,f,g (6)
+
+
+Num  Len  Segments
+ 1   2      c  f    <-- "f" is in 1 but not 5, "c" is the other
+ 7   3    a c  f    <-- "a" is unique between 1 and 7
+ 4   4     bcd f    <-- "b" and "d" are only in 4
+-----------------------------------------------------------------
+ 2   5    a cde g   <-- "e" is unique to 2 in length <= 5 
+ 3        a cd fg   
+ 5        ab d fg   <-- 
+-----------------------------------------------------------------
+ 0   6    abc efg   <-- if the missing letter is not in "1", the number is 6 and the letter is d
+ 6        ab defg   <-- the other number with length 6 is 6
+ 9        abcd fg   <-- if the missing letter is not in any of 1, 7, 4 => the ltter is "e" and the number is 9
+-----------------------------------------------------------------
+ 8   7    abcdefg
+
+
+Steps:
+0. Easy numbers by length: 1, 7, 4, 8
+1. "a" <- The segment in 7 that is not in 1
+2. Length 6:
+   - Each has a missing segment (find each)
+   - "e" <- The missing segment that is NOT in 4
+         Num = 9
+   - "c" <- The missing segment that is in 1
+         Num = 6
+   - "d" <- The other missing segment
+         Num = 0
+
+3. Length 5:
+   - Remove all known segments:
+   - "g" <- the only digit with one missing segment
+         Num = 2
+   - "f" <- from the digit with two missing segments, the one that is not "g"
+         Num = 3
+   - "b" <- from the digit with three missing segments, the one that is not "f" or "g"
+         Num = 5
+        
