@@ -1,0 +1,86 @@
+DEFINITIONS:
+- Line - 
+* a line of code, can have one or more chunks
+
+- Chunk -
+* contains zero or more other chunks
+* not separated by a delimiter
+* if one chunk stops, the next can immediately begin
+* Every chunk must open and close with legal, matching characters (), {}, [], <>,
+
+- Incomplete -
+
+- Corrupted -
+* A chunk (and therfore a line) is corrupted when an unexpected closing
+  character is encountered
+
+
+
+INPUT: Strings containing potentially nested pairs of brackets (), {}, [], <>,
+with abnormalities
+
+OUTPUT: The point total for the first illegal character in each corrupted line
+
+): 3 pts
+]: 57 pts
+}: 1197 pts
+>: 25137 pts
+
+- Find and discard the corrupted lines first
+
+DATA:
+lines: slice of strings
+
+CONSTS:
+map from illegal characters to points (map[byte]int)
+map from opening to closing (map[byte][byte])
+
+ALGORITHM:
+- Import data into a slice of strings with each string being one line
+- Initialize a stack of bytes
+- score := 0
+
+- FOR each line:
+  - Initialize a new Reader on that line
+  - LOOP:
+    - read a byte
+    - if error, break
+    - if the byte is opening
+      * push it on the stack
+    - if it is closing
+      * pop a byte from the stack
+      * compare whether closing matches opening
+      * if it matches
+        - continue
+      * else
+        - add the score to the total score
+        - continue to next line
+
+- Output total score
+
+********************PART 2********************************
+
+RULES:
+- Discard corrupted lines
+- The remaining lines are incomplete
+- Incomplete lines are missing closing charcters
+
+- Figure out the sequence of closing characters that complete all open
+chunks
+
+- Calculate completion scores for each line
+  - Start with 0
+  FOR each character:
+    - Multiply total score by 5
+    - Then add the character's point value
+
+- Sort completion scores
+- Take the middle score (there will always be an odd number)
+
+
+STEPS:
+- Discard corrupted lines
+- Get the completion strings of the remaining lines
+- Calculate the scores of each string
+- Sort the scores
+- Select the middle score

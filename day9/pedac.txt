@@ -1,0 +1,80 @@
+INPUT: Rows of numbers, each digit representing a height in a location
+OUTPUT: Sum of the RISK LEVELS for all local low points
+
+DEFINITIONS:
+
+* Adjacent location
+A location that is up, down, left, or right from a given
+location. (Most points have 4 adjacent locations).
+
+In a slice: all locations where x0 == x1 and y0 = y1 +/- 1 or y0 == y1 and x0 == x1 +- 1
+
+* Low point 
+A location where all adjacent locations are higher than the location
+(All have a greater value)
+
+* Risk level
+Height + 1 of a low point
+
+
+DATA:
+- 2d slice of all locations, each holding a one digit int
+
+
+MENTAL MODEL:
+- Read digits into a 2d slice of ints ([][]int)
+- Create a danger value sum: 0
+- For each location in each row:
+  - If all adjacent points are greater than this point, add 1 + height to the
+    danger value sum
+- Return the danger value sum
+
+-----------------------------------------------------------------------------------------------
+
+Part 2:
+
+DEFINITIONS:
+
+Basin
+- All locations that eventually flow downward to a low point. Surrounded by a
+ridge of height 9. The locations with height 9 do not count as part of basin
+- All locations (not with height 9) will be part of exactly one basin
+
+Size (of basin)
+- The number of locations inside the basin
+
+
+INPUT: Same map as part 1 (2d array of heights)
+OUTPUT: product of the sizes of the three largest basins
+
+DATA:
+- Location (type)
+  - height (int) - the height at that location
+  - visited (bool) - flag to be set when an algorithm visits the location
+- 2d array of locations
+- Coords (type)
+  - x (int)
+  - y (int)
+
+MENTAL MODEL:
+- Input data and create 2d array of locations (all .visited set to false)
+- Find and store the locations of all the low points (slice of coords)
+- Initialize slice of ints to store top three basin sizes {0,0,0}
+- For each location in list of low points:
+  - find the basin size
+  - for each size in topBasinSizes:
+    - if currBasinSize > basinSize:
+      * replace basinSize with curBasinSize
+      * break
+
+Find Basin Size:
+INPUT: location of the low point
+OUTPUT: size of basin
+
+if current location is height == 9 or is marked:
+  return 0
+else
+  mark current location
+  get basin size of all adjacent locations
+  return 1 + sumAdjacentBasinSizes
+

@@ -1,0 +1,70 @@
+INPUT: A list of pairs of connections between caves (caves are named with strings and a dash represents connection)
+OUTPUT: The number of distinct paths from 'start' to 'end' that meet specified rules
+
+RULES/DEFINITIONS:
+
+Cave:
+- Has a name, like 'a', 'jk', etc
+- Begin in a cave named 'start' and try to make it to 'end'
+- Small cave: lowercase letters
+- Large cave: uppercase letters
+
+RULE: Visit small caves at most once
+
+DATA:
+
+type cave struct {
+  name string
+  connected []*cave
+  small bool
+}
+
+???
+type network struct {
+  start *cave
+  end *cave
+}
+
+ALGORITHM:
+
+- Read in data and return a network of caves
+- Find all paths
+- Count all paths
+
+FIND ALL:
+- Input: network of caves and a list of visited caves
+- Output: list of all valid paths through the cave
+- Algorithm:
+  - initialize an empty list of paths [][]cave
+  - begin with the last value of visited (currCave)
+
+  - FOR each connection of currCave (next):
+    - IF next is 'end'
+      * make a copy of visited
+      * append next
+      * append copy to paths
+
+    - ELSE IF next is small and has been visited
+      * continue with loop to next connection
+
+    - ELSE
+      * make a copy of visited
+      * add next to copy
+      * call this function with the copy
+      * append the return value onto paths
+
+  - Return paths
+
+READ IN:
+- create a temp start and end *cave
+- Create a temporary place to store all caves []cave
+- Read and split each line on '-'
+- FOR each line:
+  - FOR each string, see if there is a cave already in temp
+    - if there is not, create a new cave and add it to temp
+    - either way, point to it with c1 or c2 for now
+  - add c2 to c1's connections
+  - add c1 to c2's connections
+  - if either one is 'start' or 'end', assign to the appropriate pointer
+- Create and return a network
+

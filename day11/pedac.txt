@@ -1,0 +1,73 @@
+Day 11 - Part 1
+
+DEFINITIONS:
+
+- Energy
+
+- Flashes
+
+- Energy Level
+  - Value between 0-9
+
+- Changes in Energy Levels Happen in Steps:
+  1. Each octopus increases energy by 1
+  2. Any octopus with level > 9 FLASHES
+     - All surrounding octopuses increase by 1
+     - If this causes the energy level to be greater than 9, it also flashes
+     - This continues until no more octopuses flash
+     - Octopuses flash at most once per step
+  3. Any octopus that flashed is reset to 0
+
+DATA:
+
+--
+type octopus struct {
+  energy int
+  flashed bool
+}
+
+methods: flash?, increaseEnergy, reset
+
+--
+type board [][]octopus {
+}
+
+--
+toFlash []coord
+
+--
+totalFlashes
+
+INPUT: a list of ints (0-9) representing the energy levels
+OUTPUT: total flashes
+
+--
+
+SET-UP:
+- inputData to the board
+- totalFlashes to 0
+
+func increaseEnergy(coord) {
+  // if the oct has not flashed:
+     - increase the energy by 1
+     - if the energy is > 9
+        - set flashed === true
+        - add coordinates to toFlash list
+
+}
+
+ALGORITHM FOR EACH ROUND:
+- For N rounds:
+- Step 1:
+  - For each coord on board:
+    - Call increaseEnergy
+- Step 2:
+  - While toFlash list length is greater than 0
+    - Get list of adjacent coords (x, y +/- 1)
+    - Call increaseEnergy for that coord
+- Step 3:
+  - Set all octopuses flashed = false
+
+
+
+
