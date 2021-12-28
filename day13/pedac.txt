@@ -1,0 +1,53 @@
+INPUT: A list of points (x,y) and then instructions
+OUTPUT: The number of dots visible after the first set of fold instructions
+
+RULES/DEFINITIONS:
+0,0 is top left.
+x,y => x increases to the right, y increases down
+
+FOLD:
+
+  0 1 2 3   
+0 . . . #
+1 . . # .
+2 . . . .
+3 . # . . 
+
+Fold along x=2
+
+  0 1|2 3   
+0 . .|. #    3,0 => 0,0   
+1 . .|# .    2,1 => 1,1   
+2 . .|. .    
+3 . #|. .    
+
+For x translations ->
+if coord.x < x
+  - do nothing
+else 
+  - new coord.x = 2x - coord.x - 1
+  - leave y alone
+
+Same for y (just reversed)
+
+DATA:
+coord{x,y} (previously used)
+
+
+Intructions
+"fold along " <-- identify the instruction
+"[x|y]" <-- tells where the fold should happen
+= <-- separator
+digit(s) <-- tells where to fold
+
+
+
+
+ALGORITHM:
+- Read in list of points and append them to a list of coords
+- (Skip for part 1): Read in instructions
+- Run the fold algorithm on each point
+  - Create a new list of points
+  - Add each new point to the new list if it doesn't already exist
+
+

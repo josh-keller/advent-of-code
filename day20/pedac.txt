@@ -1,0 +1,17 @@
+1. Init an array for the results of reading the algorithm
+2. Read the algorithm character by chacter:
+   - if '#' -> 1
+   - if '.' -> 0
+   - if "\n" skip
+3. Read the image into a slice of slices of bytes
+4. Map the slice to another slice using binary numbers from neighbors function
+5. Repad if necessary (only on even iterations?)
+
+
+NEED:
+- Function to get neighbor values and map to a binary number
+- Function to pad the slice of bytes to ensure there are three dark pixels all
+  around
+- Function to display (0 -> '.', 1 -> '#')
+
+

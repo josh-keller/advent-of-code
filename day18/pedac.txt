@@ -1,0 +1,72 @@
+INPUT: A list of nested pairs of numbers
+OUTPUT: The magnitude of the "final sum"
+
+OPERATIONS:
+
+Add:
+   - Form a pair out of two pairs
+   - [1, 2] + [3, 4] = [[1, 2], [3, 4]]
+   - [1, 2] + [3, [4, 5]] = [[1, 2], [3, [4, 5]]]
+
+Reduce:
+
+  - Explodes
+    - If a pair is nested inside four pairs, it explodes
+    - 
+
+  - Splits
+
+
+TREE OPERATIONS:
+
+Nodes of the tree have 0 or 2 children
+
+Add:
+ - Form a new root node
+ - Add the first operand as the left child (make new node the parent)
+ - Make the second operand the right child (make new node the parent)
+ - Run the reduce algorithm
+
+Reduce:
+
+while the return value of calling reduce is false, keep calling reduce
+
+(n node) func (depth int) bool {
+ - Begin at the root node
+ - Set depth at 1
+ - if depth > 5:
+   - store values of left and right children
+   - SET left and right pointers to nil
+   - SET current value to 0
+   - IF current node is left node of parent:
+
+     - SET currNode to right child of parent
+     - WHILE currNode.right is not nil:
+       - set currNode to currNode.left
+     - add rightVal to currNode val
+
+     - SET currNode parent.parent
+     - WHILE currNode.left is nil && currNode.parent is not nil
+       - SET currNode to currNode.parent
+     
+     - IF currNode.parent is not nil:
+       - SET currNode to currNode.right
+       - WHILE currNode.right is not nil:
+         - set currNode to currNode.right
+       - add leftVale to currNode val
+   - RETURN true
+
+
+ - if the leftChild is not nil:
+   - reduce the left child: left.reduce(depth + 1)
+   - if reduce returns true, RETURN true
+   - reduce the right child: right.reduce(depth + 1)
+   - if reduce returns true, RETURN true
+ - else if value is 10 or greater:
+   - create two new nodes with vals: val / 2 and (val / 2) + (val % 2)
+   - set current node to parent of each
+   - attach to left and right pointers
+   - RETURN true
+ - else
+   - RETURN false
+

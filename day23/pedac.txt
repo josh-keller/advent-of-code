@@ -1,0 +1,33 @@
+BOARD:
+- A collection of sqaures
+- Holds pointers to important squares
+
+Hall Square:
+- Can be a stop or an entrance
+- Stop: may hold an amphipod
+- Entrance: points to a room
+
+Room:
+- Can hold up to 4 amphipods
+- Each amphipod has an exit cost
+- Has three states:
+  - 'closed'
+  - 'open'
+  - 'full'
+
+AMPHIPOD:
+- Can be 'A', 'B', 'C', or 'D'
+- Can be:
+  - init: initial state
+  - out: moved into the hallway
+  - in: moved back into room
+
+MOVE:
+- Depending on an amphipod's state, there are certain places it can go:
+
+- If it is in 'init':
+  - it can go to a hallway space -> move into 'out' state
+  - it can go to its room (if it's empty) -> move into 'in' state
+- If it is in 'out':
+  - it can go to its room (if it's empty) -> mvoe into 'in' state
+

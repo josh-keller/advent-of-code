@@ -1,0 +1,19 @@
+- Read first line into a string 'polymer'
+- Read next lines into a map
+
+
+- FOR N steps:
+  - Create a new string builder
+  - FOR each byte from 0 to len - 2 in polymer:
+    - Append byte i to the reader
+    - Make a slice of byte i and i+1
+    - Using that byte slice, check the map to see if there is another
+      character to insert
+    - If there is, insert it, otherwise, move on
+  - Insert the last character
+  - Set polymer = to the string representation of the builder
+
+- Create a map from byte to int 'counts'
+- Count the bytes in 'polymer'
+- Find the max and the min
+- Subratct min from max

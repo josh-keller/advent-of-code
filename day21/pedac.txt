@@ -1,0 +1,5 @@
+Deterministic Die:
+- Make a struct
+- Number of times rolled
+- Last roll
+- Methods:
