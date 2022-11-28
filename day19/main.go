@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"regexp"
 	"sort"
@@ -91,7 +92,7 @@ func (b Beacon) DistanceTo(other Beacon) Distance {
 
 type Scanner []Beacon
 
-func readInput(filename string) ([]Scanner, error) {
+func readInput(filename string) (map[int]Scanner, error) {
 	readFile, err := os.Open(filename)
 	defer readFile.Close()
 	if err != nil {
@@ -101,18 +102,20 @@ func readInput(filename string) ([]Scanner, error) {
 	fileScanner := bufio.NewScanner(readFile)
 	fileScanner.Split(bufio.ScanLines)
 
-	var s []Scanner
+	s := make(map[int]Scanner)
+	sIdx := -1
 	var curr_sensor Scanner
 	header := regexp.MustCompile(`--- scanner \d+ ---`)
 
 	for fileScanner.Scan() {
 		line := fileScanner.Bytes()
 		if header.Match(line) {
+			sIdx++
 			continue
 		}
 
 		if len(line) == 0 {
-			s = append(s, curr_sensor)
+			s[sIdx] = curr_sensor
 			curr_sensor = []Beacon{}
 			continue
 		}
@@ -120,7 +123,7 @@ func readInput(filename string) ([]Scanner, error) {
 		curr_sensor = append(curr_sensor, readBeacon(string(line)))
 	}
 
-	s = append(s, curr_sensor)
+	s[sIdx] = curr_sensor
 
 	return s, nil
 }
@@ -218,7 +221,7 @@ func MatchesAtLeast(sInfo1, sInfo2 map[Beacon](map[Distance]bool), target int) (
 				if dists2[dist] {
 					matches++
 					if matches >= target {
-						return true, b1.DistanceTo(b2)
+						return true, b2.DistanceTo(b1)
 					}
 				}
 			}
@@ -241,37 +244,44 @@ func MatchesAtLeast(sInfo1, sInfo2 map[Beacon](map[Distance]bool), target int) (
 func main() {
 	scanners, _ := readInput("example.txt")
 
-	beacons := mapset.NewSet[Beacon]()
 	currentScanner := scanners[0]
-	scanners = scanners[1:]
-	scannerSet := mapset.NewSet[[3]int]()
-	scannerSet.Add([3]int{0, 0, 0})
+	delete(scanners, 0)
+	var rotatedScanner Scanner
 
-	for _, b := range currentScanner {
-		beacons.Add(b)
+	beaconSet := mapset.NewSet(currentScanner...)
+
+	scannerSet := mapset.NewSet(Distance{0, 0, 0})
+
+MainLoop:
+	for len(scanners) > 1 {
+		fmt.Println("*******************TOP******************")
+		fmt.Println("Length: ", len(scanners))
+		scannerInfo := MakeScannerInfo(currentScanner)
+		// Try each scanner
+		for testIdx, testScanner := range scanners {
+			// Try each rotation
+			for i := 0; i < 24; i++ {
+				rotatedScanner = RotateScanner(testScanner, i)
+				testScannerInfo := MakeScannerInfo(rotatedScanner)
+				if match, offset := MatchesAtLeast(scannerInfo, testScannerInfo, 12); match {
+					fmt.Printf("Match with offset: %v", offset)
+					// add the offset rotate beacons to the set of beacons
+					offsetBeacons := OffsetAll(rotatedScanner, offset)
+					beaconSet = beaconSet.Union(mapset.NewSet(offsetBeacons...))
+
+					// add the offset to the set of scanners (need to figure out which way)
+					scannerSet.Add(offset)
+
+					// take testIdx out of scanners
+					delete(scanners, testIdx)
+					// set the rotatedScanner as the new currentScanner
+					currentScanner = OffsetAll(rotatedScanner, offset)
+					continue MainLoop
+				}
+			}
+		}
+
 	}
 
-	// for len(scanners) > 0 {
-	// 	scannerInfo := MakeScannerInfo(currentScanner)
-	// 	// Try each scanner
-	// 	for testIdx, testScanner := range scanners {
-	// 		// Try each rotation
-	// 		for i := 0; i < 24; i++ {
-	// 			rotatedScanner := RotateScanner(testScanner, i)
-	// 			testScannerInfo := MakeScannerInfo(rotatedScanner)
-	// 			if match, offset := MatchesAtLeast(scannerInfo, testScannerInfo, 12); match {
-	// 				offsetBeacons := OffsetAll(rotatedScanner, offset)
-	// 				scannerSet = scannerSet.Union(mapset.NewSet[Beacon](offsetBeacons...))
-	//
-	// 				// add the offset rotate beacons to the set of beacons
-	// 				// add the offset to the set of scanners (need to figure out which way)
-	// 				// take testIdx out of scanners
-	// 				// set the rotatedScanner as the new currentScanner
-	//
-	// 			}
-	// 		}
-	// 	}
-	//
-	// }
-	//
+	fmt.Printf("Total number of beacons: %d", beaconSet.Cardinality())
 }
