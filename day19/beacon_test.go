@@ -141,6 +141,7 @@ func TestOffset(t *testing.T) {
 }
 
 func TestMatchesAtLeast(t *testing.T) {
+	offsetBy := [3]int{-1, -1, -1}
 	offset := [3]int{1, 1, 1}
 
 	scanner1 := []Beacon{
@@ -166,7 +167,7 @@ func TestMatchesAtLeast(t *testing.T) {
 
 	if !matches {
 		t.Errorf("Should match, but does not")
-	} else if offset != gotOffset {
+	} else if offsetBy != gotOffset {
 		t.Errorf("Got offset: %v, want offset: %v", gotOffset, offset)
 	}
 
@@ -174,7 +175,7 @@ func TestMatchesAtLeast(t *testing.T) {
 
 	if !matches {
 		t.Errorf("Should match, but does not")
-	} else if offset != gotOffset {
+	} else if offsetBy != gotOffset {
 		t.Errorf("Got offset: %v, want offset: %v", gotOffset, offset)
 	}
 
@@ -182,6 +183,16 @@ func TestMatchesAtLeast(t *testing.T) {
 
 	if matches {
 		t.Errorf("Should not match, but does")
+	}
+
+}
+
+func TestAbsDistance(t *testing.T) {
+	got := absDistance(Distance{1105, -1205, 1229}, Distance{-92, -2380, -20})
+	want := 3621
+
+	if got != want {
+		t.Errorf("got: %d, want: %d", got, want)
 	}
 
 }

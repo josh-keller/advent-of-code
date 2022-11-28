@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math"
 	"os"
 	"regexp"
 	"sort"
@@ -242,29 +243,28 @@ func MatchesAtLeast(sInfo1, sInfo2 map[Beacon](map[Distance]bool), target int) (
 }
 
 func main() {
-	scanners, _ := readInput("example.txt")
+	scanners, _ := readInput("input.txt")
 
-	currentScanner := scanners[0]
+	toCheck := []Scanner{scanners[0]}
 	delete(scanners, 0)
 	var rotatedScanner Scanner
 
-	beaconSet := mapset.NewSet(currentScanner...)
-
+	beaconSet := mapset.NewSet(toCheck[0]...)
 	scannerSet := mapset.NewSet(Distance{0, 0, 0})
 
-MainLoop:
-	for len(scanners) > 1 {
-		fmt.Println("*******************TOP******************")
-		fmt.Println("Length: ", len(scanners))
+	for len(scanners) > 0 {
+		currentScanner := toCheck[0]
+		toCheck = toCheck[1:]
 		scannerInfo := MakeScannerInfo(currentScanner)
 		// Try each scanner
+		var toDelete []int
+
 		for testIdx, testScanner := range scanners {
 			// Try each rotation
 			for i := 0; i < 24; i++ {
 				rotatedScanner = RotateScanner(testScanner, i)
 				testScannerInfo := MakeScannerInfo(rotatedScanner)
 				if match, offset := MatchesAtLeast(scannerInfo, testScannerInfo, 12); match {
-					fmt.Printf("Match with offset: %v", offset)
 					// add the offset rotate beacons to the set of beacons
 					offsetBeacons := OffsetAll(rotatedScanner, offset)
 					beaconSet = beaconSet.Union(mapset.NewSet(offsetBeacons...))
@@ -273,15 +273,43 @@ MainLoop:
 					scannerSet.Add(offset)
 
 					// take testIdx out of scanners
-					delete(scanners, testIdx)
+					toDelete = append(toDelete, testIdx)
 					// set the rotatedScanner as the new currentScanner
-					currentScanner = OffsetAll(rotatedScanner, offset)
-					continue MainLoop
+					toCheck = append(toCheck, OffsetAll(rotatedScanner, offset))
+					break
 				}
 			}
 		}
 
+		for _, idx := range toDelete {
+			delete(scanners, idx)
+		}
 	}
 
 	fmt.Printf("Total number of beacons: %d", beaconSet.Cardinality())
+
+	fmt.Printf("Largest distance: %d", maxManhattan(scannerSet.ToSlice()))
+}
+
+func maxManhattan(slice []Distance) int {
+	maxDist := 0
+
+	for i1, s1 := range slice {
+		for i2 := i1 + 1; i2 < len(slice); i2++ {
+			s2 := slice[i2]
+			dist := absDistance(s1, s2)
+			if dist > maxDist {
+				maxDist = dist
+			}
+		}
+	}
+
+	return maxDist
+}
+
+func absDistance(d1, d2 Distance) int {
+	dx := int(math.Abs(float64(d1[0] - d2[0])))
+	dy := int(math.Abs(float64(d1[1] - d2[1])))
+	dz := int(math.Abs(float64(d1[2] - d2[2])))
+	return dx + dy + dz
 }
