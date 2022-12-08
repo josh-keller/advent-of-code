@@ -90,29 +90,29 @@
     {
       "part1": {
         "solved": false,
-        "result": null,
+        "result": "2031851",
         "attempts": [],
-        "time": null
+        "time": 0.619625
       },
       "part2": {
         "solved": false,
-        "result": null,
+        "result": "2568781",
         "attempts": [],
-        "time": null
+        "time": 0.628292
       }
     },
     {
       "part1": {
         "solved": false,
-        "result": null,
+        "result": "1711",
         "attempts": [],
-        "time": null
+        "time": 1.054875
       },
       "part2": {
         "solved": false,
-        "result": null,
+        "result": "301392",
         "attempts": [],
-        "time": null
+        "time": 42.842958
       }
     },
     {
