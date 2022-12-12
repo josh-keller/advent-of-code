@@ -16,13 +16,13 @@
 [![Day](https://badgen.net/badge/03/%E2%98%85%E2%98%85/green)](src/day03)
 [![Day](https://badgen.net/badge/04/%E2%98%85%E2%98%85/green)](src/day04)
 [![Day](https://badgen.net/badge/05/%E2%98%85%E2%98%85/green)](src/day05)
-![Day](https://badgen.net/badge/06/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/06/%E2%98%85%E2%98%85/green)](src/day06)
 ![Day](https://badgen.net/badge/07/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/08/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/09/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/10/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/11/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/12/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/10/%E2%98%85%E2%98%86/yellow)](src/day10)
+[![Day](https://badgen.net/badge/11/%E2%98%85%E2%98%85/green)](src/day11)
+[![Day](https://badgen.net/badge/12/%E2%98%85%E2%98%86/yellow)](src/day12)
 ![Day](https://badgen.net/badge/13/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/14/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/15/%E2%98%86%E2%98%86/gray)
@@ -97,16 +97,16 @@ Both parts: 5.4415130000000005ms
 
 ```
 Day 05
-Time part 1: 1.179ms
-Time part 2: 0.708ms
-Both parts: 1.8865530000000001ms
+Time part 1: 1.973ms
+Time part 2: 1.188ms
+Both parts: 3.161282ms
 ```
 
 ```
 Day 06
-Time part 1: -
-Time part 2: -
-Both parts: -
+Time part 1: 0.583ms
+Time part 2: 0.558ms
+Both parts: 1.141759ms
 ```
 
 ```
@@ -132,23 +132,23 @@ Both parts: -
 
 ```
 Day 10
-Time part 1: -
+Time part 1: 0.325ms
 Time part 2: -
-Both parts: -
+Both parts: 0.324672ms
 ```
 
 ```
 Day 11
-Time part 1: -
-Time part 2: -
-Both parts: -
+Time part 1: 0.136ms
+Time part 2: 238.49ms
+Both parts: 238.625133ms
 ```
 
 ```
 Day 12
-Time part 1: -
+Time part 1: 690.815ms
 Time part 2: -
-Both parts: -
+Both parts: 690.815067ms
 ```
 
 ```
@@ -243,8 +243,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 10/50
-Total time: 25.577ms
+Total stars: 16/50
+Total time: 957.758ms
 ```
 
 <!--/RESULTS-->
