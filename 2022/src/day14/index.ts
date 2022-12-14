@@ -70,36 +70,36 @@ class Grid {
     const [xStart, xEnd] = p1.x < p2.x ? [p1.x, p2.x] : [p2.x, p1.x]
     const [yStart, yEnd] = p1.y < p2.y ? [p1.y, p2.y] : [p2.y, p1.y]
 
-    for (let y = yStart; y <= yEnd; y++) {
-      if (!this.columns[y]) {
-        this.columns[y] = []
+    for (let x = xStart; x <= xEnd; x++) {
+      if (!this.columns[x]) {
+        this.columns[x] = []
       }
 
-      for (let x = this.columns[y].length; x < xStart; x++) {
-        this.columns[y][x] = "."
+      for (let y = this.columns[x].length; y < yStart; y++) {
+        this.columns[x][y] = "."
       }
 
-      for (let x = xStart; x <= xEnd; x++) {
-        this.columns[y][x] = "#"
+      for (let y = yStart; y <= yEnd; y++) {
+        this.columns[x][y] = "#"
       }
     }
   }
 
   drawSand(p1: Point) {
-    const last_x = this.columns[p1.y].length
-    for (let x = last_x; x < p1.x; x++) {
-      this.columns[p1.y][x] = "."
+    const last_y = this.columns[p1.x].length
+    for (let y = last_y; y < p1.y; y++) {
+      this.columns[p1.x][y] = "."
     }
 
-    this.columns[p1.y][p1.x] = "o"
+    this.columns[p1.x][p1.y] = "o"
   }
 
   toString(): string {
-    const y_start =
+    const x_start =
       Math.min(...Object.keys(this.columns).map((key) => parseInt(key))) - 1
-    const y_end =
-      Math.max(...Object.keys(this.columns).map((key) => parseInt(key))) + 1
     const x_end =
+      Math.max(...Object.keys(this.columns).map((key) => parseInt(key))) + 1
+    const y_end =
       Math.max(
         ...Object.keys(this.columns).map(
           (key) => this.columns[parseInt(key)].length,
@@ -107,17 +107,13 @@ class Grid {
       ) + 2
 
     const output_arr: string[] = []
-    for (let x = 0; x < x_end; x++) {
-      const curr_line: string[] = [x.toString().padStart(3, "0") + ":" ]
-      for (let y = y_start; y <= y_end; y++) {
-        const point = !this.columns[y] ? "_" : this.columns[y][x] || "_"
+    for (let y = 0; y < y_end; y++) {
+      const curr_line: string[] = [y.toString().padStart(3, "0") + ":" ]
+      for (let x = x_start; x <= x_end; x++) {
+        const point = !this.columns[x] ? "_" : this.columns[x][y] || "_"
         curr_line.push(point)
       }
       output_arr.push(curr_line.join(""))
-    }
-    const debug_repeat = 450 - y_start
-    if (debug_repeat > 0) {
-      output_arr.push("    " + " ".repeat(debug_repeat) + "|")
     }
 
     return output_arr.join("\n")
@@ -128,13 +124,13 @@ class Grid {
     let x = start.x
     let y = start.y
 
-    if (this.columns[y][x] != ".") {
+    if (this.columns[x][y] != ".") {
       throw new Error("Spot for sand is not empty")
     }
-    let loops = 0
+
     while (true) {
-      if (this.columns[y]?.length <= x) { return false }
-      const fall_to = this.columns[y].slice(x).findIndex((square) => square != ".") + x - 1
+      if (this.columns[x]?.length <= y) { return false }
+      const fall_to = this.columns[x].slice(y).findIndex((square) => square != ".") + y - 1
       // There was no empty space below
       if (fall_to === -1) {
         // console.log("Ahhhh! Falling forever!")
@@ -142,33 +138,33 @@ class Grid {
       }
 
       // If there is no column to the left, the sand will fall
-      if (!this.columns[y - 1]) {
+      if (!this.columns[x - 1]) {
         // console.log("nothing to the left")
         return false
       }
-      const down_left = this.columns[y - 1][fall_to + 1]
+      const down_left = this.columns[x - 1][fall_to + 1]
       if (down_left === "." || down_left === undefined) {
         // console.log("going down left")
-        y = y - 1
-        x = fall_to + 1
+        x = x - 1
+        y = fall_to + 1
         continue
       }
 
-      if (!this.columns[y + 1]) {
+      if (!this.columns[x + 1]) {
         // console.log("nothing to the right")
         return false
       }
-      const down_right = this.columns[y + 1][fall_to + 1]
+      const down_right = this.columns[x + 1][fall_to + 1]
       if (down_right === "." || down_right === undefined) {
         // console.log("going down right")
-        y = y + 1
-        x = fall_to + 1
+        x = x + 1
+        y = fall_to + 1
         continue
       }
 
       // If it gets here, it is resting
       // console.log("resting:", fall_to, ",", y)
-      this.drawSand(new Point(fall_to, y))
+      this.drawSand(new Point(x, fall_to))
       return true
     }
   }
@@ -183,7 +179,7 @@ const parseInput = (rawInput: string) => {
       if (p_arr.length !== 2) {
         throw new Error("Parsing Error!")
       }
-      return new Point(...(p_arr.reverse() as [number, number]))
+      return new Point(...(p_arr as [number, number]))
     }),
   )
 
@@ -203,7 +199,7 @@ const part1 = (rawInput: string) => {
 
   console.log(grid.toString())
 
-  while (grid.dropSand(new Point(0, 500))) {
+  while (grid.dropSand(new Point(500, 0))) {
     count++
     console.log("-----------------------\n")
     console.log("Count:", count, "\n")
