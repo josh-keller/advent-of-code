@@ -23,12 +23,12 @@
 [![Day](https://badgen.net/badge/10/%E2%98%85%E2%98%86/yellow)](src/day10)
 [![Day](https://badgen.net/badge/11/%E2%98%85%E2%98%85/green)](src/day11)
 [![Day](https://badgen.net/badge/12/%E2%98%85%E2%98%85/green)](src/day12)
-![Day](https://badgen.net/badge/13/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/14/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/15/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/16/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/17/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/18/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/13/%E2%98%85%E2%98%85/green)](src/day13)
+[![Day](https://badgen.net/badge/14/%E2%98%85%E2%98%85/green)](src/day14)
+[![Day](https://badgen.net/badge/15/%E2%98%85%E2%98%86/yellow)](src/day15)
+[![Day](https://badgen.net/badge/16/%E2%98%85%E2%98%86/yellow)](src/day16)
+[![Day](https://badgen.net/badge/17/%E2%98%85%E2%98%86/yellow)](src/day17)
+[![Day](https://badgen.net/badge/18/%E2%98%85%E2%98%85/green)](src/day18)
 ![Day](https://badgen.net/badge/19/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/20/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/21/%E2%98%86%E2%98%86/gray)
@@ -146,51 +146,51 @@ Both parts: 238.625133ms
 
 ```
 Day 12
-Time part 1: 81.544ms
-Time part 2: 37.557ms
-Both parts: 119.100723ms
+Time part 1: 56.583ms
+Time part 2: 26.563ms
+Both parts: 83.14641900000001ms
 ```
 
 ```
 Day 13
-Time part 1: -
-Time part 2: -
-Both parts: -
+Time part 1: 6.996ms
+Time part 2: 10.556ms
+Both parts: 17.552744ms
 ```
 
 ```
 Day 14
-Time part 1: -
-Time part 2: -
-Both parts: -
+Time part 1: 36.81ms
+Time part 2: 348.022ms
+Both parts: 384.832604ms
 ```
 
 ```
 Day 15
-Time part 1: -
+Time part 1: 0.595ms
 Time part 2: -
-Both parts: -
+Both parts: 0.595321ms
 ```
 
 ```
 Day 16
-Time part 1: -
+Time part 1: 5013.144ms
 Time part 2: -
-Both parts: -
+Both parts: 5013.144026ms
 ```
 
 ```
 Day 17
-Time part 1: -
+Time part 1: 24.397ms
 Time part 2: -
-Both parts: -
+Both parts: 24.397313ms
 ```
 
 ```
 Day 18
-Time part 1: -
-Time part 2: -
-Both parts: -
+Time part 1: 19.04ms
+Time part 2: 57.576ms
+Both parts: 76.615893ms
 ```
 
 ```
@@ -243,8 +243,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 17/50
-Total time: 386.044ms
+Total stars: 26/50
+Total time: 5867.227ms
 ```
 
 <!--/RESULTS-->
