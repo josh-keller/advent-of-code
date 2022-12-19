@@ -90,7 +90,7 @@ class Map {
   }
 }
 
-class Queue<T extends { toString(): string }> {
+class QueueSet<T extends { toString(): string }> {
   private queue: T[] = []
   private parents: { [str: string]: T | null } = {}
 
@@ -138,48 +138,6 @@ class Queue<T extends { toString(): string }> {
   }
 }
 
-class PosSet {
-  set: Set<string> = new Set<string>()
-  parents: { [curr: string]: string } = {}
-
-  add(pos: Position, parent: Position | null): void {
-    const str = pos.toString()
-    const parStr = parent === null ? "" : parent.toString()
-
-    if (parent && this.parents[parStr] === undefined) {
-      throw new Error(
-        "Adding regular element to PosSet that doesn't have a parent",
-      )
-    }
-
-    this.parents[str] = parStr
-    this.set.add(str)
-  }
-
-  has(pos: Position): boolean {
-    return this.set.has(pos.toString())
-  }
-
-  allParents(pos: Position): string[] {
-    if (!this.has(pos)) {
-      throw new Error("Trying to find parents of position not in set")
-    }
-    const str = pos.toString()
-    const parents: string[] = []
-    let parent = this.parents[str]
-
-    while (parent !== "") {
-      if (parent === undefined) {
-        throw new Error("Could not find parent path")
-      }
-      parents.push(parent)
-      parent = this.parents[parent]
-    }
-
-    return parents
-  }
-}
-
 const validStep = (currHeight: string, nextHeight: string): boolean => {
   return nextHeight.charCodeAt(0) - currHeight.charCodeAt(0) <= 1
 }
@@ -190,7 +148,7 @@ const bfs = (
   isTarget: (pos: Position) => boolean,
   validTest: (p1: Position, p2: Position) => boolean,
 ): string[] | undefined => {
-  const q = new Queue<Position>()
+  const q = new QueueSet<Position>()
   q.enqueue(start, null)
 
   while (q.size()) {
