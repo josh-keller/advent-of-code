@@ -1,9 +1,8 @@
 import run from "aocrunner"
-
-const parseInput = (rawInput: string) => rawInput
+import { parseIntCode, Machine } from "../utils/intcode.js"
 
 const part1 = (rawInput: string) => {
-  const input = parseInput(rawInput)
+  const memory = parseIntCode(rawInput)
 
   return
 }

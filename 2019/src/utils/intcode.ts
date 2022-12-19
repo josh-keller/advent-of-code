@@ -4,34 +4,34 @@ export function parseIntCode(rawInput: string) {
 
 type InstructionInfo = {
   numParams: 0 | 1 | 2 | 3
-  storeParam: undefined | 1 | 2 | 3
-  op(...args: unknown[]): number | void
+  outParamIdx: undefined | 0 | 1 | 2
+  op(...args: unknown[]): number | undefined
 }
 
 export const instructions: Record<OpCode, InstructionInfo> = {
   1: {
     numParams: 3,
-    storeParam: 3,
+    outParamIdx: 3,
     op: (a: number, b: number) => a + b,
   },
   2: {
     numParams: 3,
-    storeParam: 3,
+    outParamIdx: 3,
     op: (a: number, b: number) => a * b,
   },
   3: {
     numParams: 1,
-    storeParam: 1,
+    outParamIdx: 1,
     op: (inputFunc: () => number) => inputFunc(),
   },
   4: {
     numParams: 1,
-    storeParam: undefined,
+    outParamIdx: undefined,
     op: (n: number, outputFunc: (n: number) => void) => outputFunc(n)
   },
   99: {
     numParams: 0,
-    storeParam: undefined,
+    outParamIdx: undefined,
     op: (): void => { return },
   },
 }
@@ -78,10 +78,11 @@ export class Instruction {
   }
 }
 
-class Machine {
+export class Machine {
   memory: number[]
   inputFunc: () => number
   outputFunc: (n: number) => void = (n: number) => console.log("Output: ", n)
+  addrPtr = 0
 
   constructor(memory: number[], inputFunc: () => number, outputFunc?: (n: number) => void) {
     this.memory = memory.slice()
@@ -92,29 +93,44 @@ class Machine {
   }
 
   run() {
-    let addrPtr = 0
-    let instruction = new Instruction(this.memory[addrPtr])
+    this.addrPtr = 0
+    let instruction = new Instruction(this.memory[this.addrPtr])
     while(instruction.continue()) {
-      const paramValues = this.getParamValues(instruction)
-      
-
+      this.executeInstruction(instruction)
+      instruction = new Instruction(this.memory[this.addrPtr])
     }
-    //   - get the info about the current opcode
   }
 
-  getParamValues(instruction: Instruction): number[] {
+  executeInstruction(instruction: Instruction): void {
+      const info = instructions[instruction.opcode]
+      const args = this.getArgVals(instruction)
+      const func = info.op
+      const output = func(...args)
+      if (info.outParamIdx && output) {
+        const outAddr = this.memory[info.outParamIdx]
+        this.memory[outAddr] = output
+      }
+
+      this.addrPtr += info.numParams + 1
+  }
+
+  getArgVals(instruction: Instruction): number[] {
     const info = instructions[instruction.opcode]
-    if (info.storeParam && instruction.paramModes[info.storeParam - 1] !== ParamMode.Position) {
+    const vals: number[] = []
+
+    if (info.outParamIdx && instruction.paramModes[info.outParamIdx - 1] !== ParamMode.Position) {
       throw new Error("Invalid output param mode")
     }
 
-    for (let i = 0; i < info.storeParam - 1; i++) {
+    for (let i = 0; i < instruction.paramModes.length - 1; i++) {
+      if (info.outParamIdx && i === info.outParamIdx) { continue }
+      const arg = this.memory[this.addrPtr + i + 1]
 
+      vals[i] = instruction.paramModes[i] === ParamMode.Immediate ? arg : this.memory[arg]
     }
 
-    instruction
+    return vals
   }
-
 }
 
 /*
