@@ -280,13 +280,13 @@
     },
     {
       "part1": {
-        "solved": false,
-        "result": "1411",
+        "solved": true,
+        "result": "7713",
         "attempts": [
           "21935",
           "1411"
         ],
-        "time": 22414.696708
+        "time": 70.230209
       },
       "part2": {
         "solved": false,

@@ -6,33 +6,14 @@ const parseInput = (rawInput: string) =>
 const part1 = (rawInput: string) => {
   let numbers = parseInput(rawInput)
   const length = numbers.length
+  const mod = length - 1
 
-  /* console.log(numbers.map(({ n }) => n.toString()).join(", ")) */
   for (let i = 0; i < length; i++) {
     const idx = numbers.findIndex((n) => n.orig === i)
     const [elem] = numbers.splice(idx, 1)
-
-    const newIdxCandidate = (idx + elem.n) % length
-    const newIdx =
-      newIdxCandidate <= 0
-        ? length - 1 + newIdxCandidate
-        : newIdxCandidate === length - 1
-        ? 0
-        : newIdxCandidate
-    /* let newIdx = idx */
-    /* const dir = elem.n / Math.abs(elem.n) */
-    /* for (let steps = elem.n; steps !== 0; steps -= dir) { */
-    /*   newIdx += dir */
-    /*   if (newIdx === 0) { */
-    /*     newIdx = length - 1 */
-    /*   } else if (newIdx === length - 1) { */
-    /*     newIdx = 0 */
-    /*   } */
-    /* } */
+    const newIdx = (((idx + elem.n) % mod) + mod) % mod
 
     numbers = [...numbers.slice(0, newIdx), elem, ...numbers.slice(newIdx)]
-    /* console.log() */
-    /* console.log(numbers.map(({ n }) => n.toString()).join(", ")) */
   }
 
   const zeroIdx = numbers.findIndex((elem) => elem.n === 0)
