@@ -286,13 +286,13 @@
           "21935",
           "1411"
         ],
-        "time": 70.230209
+        "time": 72.590209
       },
       "part2": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "1664569352803",
         "attempts": [],
-        "time": null
+        "time": 851.987834
       }
     },
     {
