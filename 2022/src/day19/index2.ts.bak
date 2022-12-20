@@ -1,0 +1,183 @@
+import run from "aocrunner"
+
+const lineRegex =
+  /Blueprint \d+: Each ore robot costs (?<oreOreCost>\d+) ore\. Each clay robot costs (?<clayOreCost>\d+) ore\. Each obsidian robot costs (?<obsOreCost>\d+) ore and (?<obsClayCost>\d+) clay\. Each geode robot costs (?<geoOreCost>\d+) ore and (?<geoObsCost>\d+) obsidian\./
+
+interface Cost {
+  ore: number
+  clay: number
+  obs: number
+}
+
+interface RobotStats {
+  cost: Cost
+  count: number
+}
+
+type StatsInit = {
+  oreOreCost: string
+  clayOreCost: string
+  obsOreCost: string
+  obsClayCost: string
+  geoOreCost: string
+  geoObsCost: string
+}
+
+interface CountsInit {
+  ore: number
+  clay: number
+  obs: number
+  geo: number
+}
+
+interface Resources {
+  ore: number
+  clay: number
+  obs: number
+}
+
+type RobotName = "ore" | "clay" | "obs" | "geo"
+
+class State {
+  robots: {
+    ore: number
+    clay: number
+    obs: number
+    geo: number
+  }
+  resources: Resources
+  geodeCount: number
+
+  static fromPrev(prev: State): State {
+    const newState = new State(prev.stats)
+    newState.robots = {...prev.robots}
+    Object.entries(newState.robots).forEach(([name, robot]) => {
+      newState.resources[name as RobotName].count = prev.resources[name as prev.robots[name as RobotName].count
+
+    })
+  }
+
+  constructor(
+    stats: StatsInit,
+    counts: CountsInit = { ore: 1, clay: 0, obs: 0, geo: 0 },
+    resources: Resources = { ore: 0, clay: 0, obs: 0 },
+    geodeCount = 0,
+  ) {
+    this.stats = stats
+    this.resources = { ...resources }
+    this.geodeCount = geodeCount
+    this.robots = {
+      ore: {
+        cost: {
+          ore: parseInt(stats.oreOreCost),
+          clay: 0,
+          obs: 0,
+        },
+        count: counts.ore,
+      },
+
+      clay: {
+        cost: {
+          ore: parseInt(stats.clayOreCost),
+          clay: 0,
+          obs: 0,
+        },
+        count: counts.clay,
+      },
+
+      obs: {
+        cost: {
+          ore: parseInt(stats.obsOreCost),
+          clay: parseInt(stats.obsClayCost),
+          obs: 0,
+        },
+        count: counts.obs,
+      },
+
+      geo: {
+        cost: {
+          ore: parseInt(stats.geoOreCost),
+          clay: 0,
+          obs: parseInt(stats.geoObsCost),
+        },
+        count: counts.geo,
+      },
+    }
+  }
+
+  buildRobot(robot: RobotName): State {
+  }
+
+  nextStates(): State[] {
+    // Create a new state for each robot that can be built
+    // Assume for right now that only one can be built each turn - this might be wrong
+    const toBuild: RobotName[] = ["geo", "obs", "clay", "ore"]
+
+    toBuild.filter(robot => this.canBuild(robot)).map(robot => this.buildRobot(robot))
+
+
+  }
+
+  canBuild(robotName: RobotName): boolean {
+    const needed = this.robots[robotName].cost
+    return Object.entries(this.resources).every(
+      ([name, qty]) => qty >= needed[name as keyof Cost],
+    )
+  }
+}
+
+const parseInput = (rawInput: string) => {
+  const lines = rawInput.split("\n")
+  const groups = lines.map((line) => line.match(lineRegex)?.groups)
+  const costs = groups.map((group) => {
+    if (group === undefined) {
+      throw new Error("group is undefined")
+    }
+
+    return new State(group as StatsInit)
+  })
+
+  return costs
+}
+
+const bfs = (startingState: State): number => {
+  let geodeCount = 0
+  const states
+
+  return geodeCount
+}
+
+const part1 = (rawInput: string) => {
+  const input = parseInput(rawInput)
+
+  return
+}
+
+const part2 = (rawInput: string) => {
+  const input = parseInput(rawInput)
+
+  return
+}
+
+run({
+  part1: {
+    tests: [
+      // {
+      //   input: ``,
+      //   expected: "",
+      // },
+    ],
+    solution: part1,
+  },
+  part2: {
+    tests: [
+      // {
+      //   input: ``,
+      //   expected: "",
+      // },
+    ],
+    solution: part2,
+  },
+  trimTestInputs: true,
+  onlyTests: false,
+})
