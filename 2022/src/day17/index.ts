@@ -35,6 +35,12 @@ class Chamber {
     7: [],
   }
 
+  topShape(): string {
+    const cols = Object.values(this.rocks)
+    const min = Math.min(...cols.map(col => col.length))
+    return cols.map(col => (col.length - min).toString()).join(",")
+  }
+
   placeRocks(ps: Point[]) {
     // console.log("Placing: ", ps)
     ps.forEach(p => this.rocks[p.x][p.y] = true)
@@ -183,9 +189,6 @@ const part1 = (rawInput: string) => {
   for (let i = 0; i < 2022; i++) {
     const rock = new Rock(i % 5, chamber)
     rock.fall(wind)
-    // console.log(chamber.toString())
-    // console.log("Highest Rock:", chamber.highestRock)
-    // console.log("~~~~~~~~~~~~~~~~~~~~~~\n\n")
   }
 
   return chamber.highestRock
@@ -193,19 +196,56 @@ const part1 = (rawInput: string) => {
 
 const part2 = (rawInput: string) => {
   const wind = new WindGenerator(rawInput)
+  const length = wind.windPattern.length
   const chamber = new Chamber()
+  // i%length-i%5-topShape
+  const memo = new Map<string, {i: number, height: number}>()
+  let heightDiff = 0
+  let rockDiff = 0
+  let startingHeight = 0
+  let startingRock = 0
+  let toAdd = 0
+  let firstOccurrence: {i:number, height: number}
 
   for (let i = 0; i < 1000000; i++) {
     const rock = new Rock(i % 5, chamber)
     rock.fall(wind)
-    console.log(chamber.highestRock / i)
+    const key = `${i%length}-${i%5}-${chamber.topShape()}`
+    if (memo.has(key)) {
+      const m = memo.get(key)
+      if (!m) { throw new Error("not in memo") }
+      firstOccurrence = m
+      startingHeight = chamber.highestRock
+      startingRock = i
+      heightDiff = chamber.highestRock - firstOccurrence.height
+      rockDiff = i - firstOccurrence.i
+      break
+    } else {
+      memo.set(key, {i, height: chamber.highestRock })
+    }
   }
 
-  return chamber.highestRock
-  const input = parseInput(rawInput)
+  if (!startingRock || !rockDiff || !heightDiff || !startingHeight) { throw new Error("undefined") }
 
-  return
+  let r=0
+  for (r = startingRock; r < 1000000000000; r += rockDiff) {
+    startingHeight += heightDiff
+  }
+  r -= rockDiff
+
+  console.log("R:", r, "H:", startingHeight)
+  const diffToEnd = (1000000000000 - r)
+  console.log("diff: ", diffToEnd)
+  memo.forEach(({i, height}) => { if (i === (firstOccurrence.i + diffToEnd)) { toAdd = height - firstOccurrence.height }})
+  console.log("to add:", toAdd)
+
+  return startingHeight + toAdd
 }
+// Need to know:
+//  - imod, currRock, topShape
+//  - Shape of the top
+//  - wind index
+//  - height (difference between times)
 
 run({
   part1: {
@@ -219,10 +259,10 @@ run({
   },
   part2: {
     tests: [
-      // {
-      //   input: ``,
-      //   expected: "",
-      // },
+      {
+        input: `>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>`,
+        expected: 1514285714288,
+      },
     ],
     solution: part2,
   },

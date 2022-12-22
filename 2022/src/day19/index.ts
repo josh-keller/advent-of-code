@@ -4,25 +4,9 @@ const lineRegex =
   /Blueprint \d+: Each ore robot costs (?<oreOreCost>\d+) ore\. Each clay robot costs (?<clayOreCost>\d+) ore\. Each obsidian robot costs (?<obsOreCost>\d+) ore and (?<obsClayCost>\d+) clay\. Each geode robot costs (?<geoOreCost>\d+) ore and (?<geoObsCost>\d+) obsidian\./
 
 type Names = "ore" | "clay" | "obsidian" | "geode"
-
-class RobotCost {
-  ore: number
-  clay: number
-  obsidian: number
-
-  constructor(ore: number, clay = 0, obsidian = 0) {
-    this.ore = ore
-    this.clay = clay
-    this.obsidian = obsidian
-  }
-}
-
-interface Costs {
-  ore: RobotCost
-  clay: RobotCost
-  obsidian: RobotCost
-  geode: RobotCost
-}
+type Count = Record<Names, number>
+type Cost = Count & { geode: 0 }
+type Blueprint = Record<Names, Cost>
 
 interface StatsInit {
   oreOreCost: string
@@ -33,9 +17,30 @@ interface StatsInit {
   geoObsCost: string
 }
 
+const names: readonly Names[] = Object.freeze([
+  "ore",
+  "clay",
+  "obsidian",
+  "geode",
+])
+
+const startingRobots: Count = Object.freeze({
+  ore: 1,
+  clay: 0,
+  obsidian: 0,
+  geode: 0,
+})
+
+const startingResources: Count = Object.freeze({
+  ore: 0,
+  clay: 0,
+  obsidian: 0,
+  geode: 0,
+})
+
 const parseInput = (rawInput: string) => {
   const lines = rawInput.split("\n")
-  const costs: Costs[] = []
+  const blueprints: Blueprint[] = []
 
   lines.forEach((line) => {
     const matchedLine = line.match(lineRegex)
@@ -51,107 +56,103 @@ const parseInput = (rawInput: string) => {
       throw new Error("Line does not match regex")
     }
     const cost = {
-      ore: Object.freeze(
-        new RobotCost(parseInt(matchedLine.groups.oreOreCost)),
-      ),
-      clay: Object.freeze(
-        new RobotCost(parseInt(matchedLine.groups.clayOreCost)),
-      ),
-      obsidian: Object.freeze(
-        new RobotCost(
-          parseInt(matchedLine.groups.obsOreCost),
-          parseInt(matchedLine.groups.obsClayCost),
-        ),
-      ),
-      geode: Object.freeze(
-        new RobotCost(
-          parseInt(matchedLine.groups.geoOreCost),
-          0,
-          parseInt(matchedLine.groups.geoObsCost),
-        ),
-      ),
+      ore: Object.freeze({
+        ore: parseInt(matchedLine.groups.oreOreCost),
+        clay: 0,
+        obsidian: 0,
+        geode: 0,
+      }),
+      clay: Object.freeze({
+        ore: parseInt(matchedLine.groups.clayOreCost),
+        clay: 0,
+        obsidian: 0,
+        geode: 0,
+      }),
+      obsidian: Object.freeze({
+        ore: parseInt(matchedLine.groups.obsOreCost),
+        clay: parseInt(matchedLine.groups.obsClayCost),
+        obsidian: 0,
+        geode: 0,
+      }),
+      geode: Object.freeze({
+        ore: parseInt(matchedLine.groups.geoOreCost),
+        clay: 0,
+        obsidian: parseInt(matchedLine.groups.geoObsCost),
+        geode: 0,
+      }),
     }
-    costs.push(Object.freeze(cost))
+    blueprints.push(Object.freeze(cost))
   })
 
-  return Object.freeze(costs)
+  return Object.freeze(blueprints)
 }
 
-type Counts = {
-  ore: number
-  clay: number
-  obsidian: number
-  geode: number
+function addCount(c1: Count, c2: Count): Count {
+  return {
+    ore: c1.ore + c2.ore,
+    clay: c1.clay + c2.clay,
+    obsidian: c1.obsidian + c2.obsidian,
+    geode: c1.geode + c2.geode,
+  }
 }
 
-const names: readonly Names[] = Object.freeze([
-  "ore",
-  "clay",
-  "obsidian",
-  "geode",
-])
+function subCount(c1: Count, c2: Count): Count {
+  return {
+    ore: c1.ore - c2.ore,
+    clay: c1.clay - c2.clay,
+    obsidian: c1.obsidian - c2.obsidian,
+    geode: c1.geode - c2.geode,
+  }
+}
 
-const startingRobots: Counts = Object.freeze({
-  ore: 1,
-  clay: 0,
-  obsidian: 0,
-  geode: 0,
-})
-
-const startingResources: Counts = Object.freeze({
-  ore: 0,
-  clay: 0,
-  obsidian: 0,
-  geode: 0,
-})
+function multCount(c: Count, n: number): Count {
+  return {
+    ore: c.ore * n,
+    clay: c.clay * n,
+    obsidian: c.obsidian * n,
+    geode: c.geode * n,
+  }
+}
 
 class State {
-  robots: Counts
-  resources: Counts
+  resources: Count
+  robots: Count
 
-  constructor(robots: Counts, resources: Counts) {
-    this.robots = { ...robots }
-    this.resources = { ...resources }
+  constructor(robots: Count, resources: Count) {
+    this.robots = robots
+    this.resources = resources
+  }
+
+  nextResources(): Count {
+    return addCount(this.resources, this.robots)
   }
 
   tick(): State {
-    return new State(this.robots, {
-      ore: this.resources.ore + this.robots.ore,
-      clay: this.resources.clay + this.robots.clay,
-      obsidian: this.resources.obsidian + this.robots.obsidian,
-      geode: this.resources.geode + this.robots.geode,
-    })
+    return new State({ ...this.robots }, addCount(this.robots, this.resources))
   }
 
   toString(): string {
-    return `${this.resources.ore},${this.resources.clay},${this.resources.obsidian},${this.resources.geode}|${this.robots.ore},${this.robots.clay},${this.robots.obsidian},${this.robots.geode}`
+    return `${this.robots.ore},${this.robots.clay},${this.robots.obsidian},${this.robots.geode}|${this.resources.ore},${this.resources.clay},${this.resources.obsidian},${this.resources.geode}`
   }
 
-  addRobot(robotName: Names, costs: Costs): State {
-    const withRobot = new State(this.robots, this.resources)
+  addRobots(robotsToAdd: Count, blueprint: Blueprint): State {
+    for (const robotName of names) {
+      const count = robotsToAdd[robotName]
+      this.robots[robotName] += count
+      this.resources = subCount(this.resources, multCount(blueprint[robotName], count))
+    }
 
-    ;(["ore", "clay", "obsidian"] as const).forEach(
-      (resource) =>
-        (withRobot.resources[resource] -= costs[robotName][resource]),
-    )
-    withRobot.robots[robotName] += 1
-
-    return withRobot
+    return this
   }
 }
 
 const dfs = (
   state: State,
-  costs: Costs,
+  blueprint: Blueprint,
   memo: Map<string, number>,
-  itersLeft: number,
+  minsLeft: number,
 ): number => {
-  if (itersLeft === 24) {
-    console.log("Starting:", state, memo)
-  }
-  // console.log("mins left:", itersLeft)
-  // console.log("state:", state.robots, state.resources)
-  if (itersLeft === 0) {
+  if (minsLeft === 0) {
     return state.resources.geode
   }
 
@@ -162,10 +163,10 @@ const dfs = (
   }
 
   // Which robots can we afford?
-  const nextStates = getNextStates(state, costs)
+  const nextStates = getNextStates(state, blueprint)
 
   const geodeCounts = nextStates.map((nextState) =>
-    dfs(nextState, costs, memo, itersLeft - 1),
+    dfs(nextState, blueprint, memo, minsLeft - 1),
   )
   const maxCount = geodeCounts.reduce(
     (max, count) => (count > max ? count : max),
@@ -177,58 +178,87 @@ const dfs = (
 
   memo.set(stateStr, maxCount)
 
-  // console.log("max:", maxCount)
   return maxCount
 }
 
-const getNextStates = (state: State, costs: Costs): State[] => {
-  const nextState = state.tick()
-  if (canAfford("geode", state, costs)) {
-    return names
-      .filter((r) => canAfford(r, state, costs))
-      .map((r) => nextState.addRobot(r, costs))
+const zeroCount: Count = {
+  ore: 0,
+  clay: 0,
+  obsidian: 0,
+  geode: 0,
+}
+
+const getNextStates = (state: State, blueprint: Blueprint): State[] => {
+  const nextStates: State[] = []
+  console.log("State:", state)
+  for (
+    let oreCount = 0;
+    oreCount <= 2;
+    // canAfford({...zeroCount, ore: oreCount}, state.resources, blueprint);
+    oreCount++
+  ) {
+    for (
+      let clayCount = 0;
+      clayCount <= 2;
+      // canAfford({...zeroCount, clay: clayCount, ore: oreCount}, state.resources, blueprint);
+      clayCount++
+    ) {
+      for (
+        let obsCount = 0;
+        obsCount <= 2;
+        // canAfford({geode: 0, obsidian: obsCount, clay: clayCount, ore: oreCount}, state.resources, blueprint);
+        obsCount++
+      ) {
+        for (
+          let geoCount = 0;
+          geoCount <= 2;
+          // canAfford({geode: geoCount, obsidian: obsCount, clay: clayCount, ore: oreCount}, state.resources, blueprint);
+          geoCount++
+        ) {
+            const robotsToAdd = { ore: oreCount, clay: clayCount, obsidian: obsCount, geode: geoCount }
+            // console.log("Try to add:", robotsToAdd)
+            if (canAfford(robotsToAdd, state.resources, blueprint)) {
+              const stateToAdd = new State({...state.robots}, state.nextResources()).addRobots(robotsToAdd, blueprint)
+              // console.log("Adding", stateToAdd)
+              nextStates.push(stateToAdd)
+            }
+          }
+      }
+    }
   }
 
-  return [
-    nextState,
-    ...names
-      .filter((r) => canAfford(r, state, costs))
-      .map((r) => nextState.addRobot(r, costs)),
-  ]
+  return nextStates
 }
 
 const canAfford = (
-  robotName: keyof Costs,
-  state: State,
-  costs: Costs,
+  robotCounts: Count,
+  resources: Count,
+  blueprint: Blueprint,
 ): boolean => {
-  return (
-    Object.entries(costs[robotName]) as Array<[keyof Costs, number]>
-  ).every(([key, cost]) => cost <= state.resources[key])
+  const totalCost = names.map(name => multCount(blueprint[name], robotCounts[name])).reduce((sums, curr) => addCount(sums, curr))
+  const resourcesLeft = subCount(resources, totalCost)
+  return Object.values(resourcesLeft).every((n) => n >= 0)
 }
 
 const part1 = (rawInput: string) => {
   const costs = parseInput(rawInput)
-  console.log(new State(startingRobots, startingResources).toString())
-  console.log(new State(startingRobots, startingResources).tick().toString())
 
-  // const bests = costs.map((cost) => {
-  //   console.log("Calling dfs:", cost)
-  //   const memo = new Map<string, number>()
-  //   const result = dfs(
-  //     new State(startingRobots, startingResources),
-  //     cost,
-  //     memo,
-  //     24,
-  //   )
-  //   console.log("Memo size:", memo.size)
-  //   return result
-  // })
-  // console.log(bests)
-  //
-  // return bests
-  //   .map((best, idx) => (idx + 1) * best)
-  //   .reduce((sum, num) => sum + num)
+  const bests = costs.map((cost) => {
+    console.log("Calling dfs:", cost)
+    const result = dfs(
+      new State(startingRobots, startingResources),
+      cost,
+      new Map<string, number>(),
+      24,
+    )
+    return result
+  })
+
+  console.log(bests)
+
+  return bests
+    .map((best, idx) => (idx + 1) * best)
+    .reduce((sum, num) => sum + num)
 }
 
 const part2 = (rawInput: string) => {
@@ -241,8 +271,8 @@ run({
   part1: {
     tests: [
       {
-        // Blueprint 1: Each ore robot costs 4 ore. Each clay robot costs 2 ore. Each obsidian robot costs 3 ore and 14 clay. Each geode robot costs 2 ore and 7 obsidian.
         input: `
+Blueprint 1: Each ore robot costs 4 ore. Each clay robot costs 2 ore. Each obsidian robot costs 3 ore and 14 clay. Each geode robot costs 2 ore and 7 obsidian.
 Blueprint 2: Each ore robot costs 2 ore. Each clay robot costs 3 ore. Each obsidian robot costs 3 ore and 8 clay. Each geode robot costs 3 ore and 12 obsidian.
 `,
         expected: 33,
