@@ -1,0 +1,5 @@
+root: pppw + sjmn
+cczh: 4 + lgvd
+sjmn: 150
+pppw: cczh / 4
+lgvd: 4

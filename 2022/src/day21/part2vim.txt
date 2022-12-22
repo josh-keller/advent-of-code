@@ -1,0 +1,7 @@
+gg/.\+: \+\d\+$ma$yaw0*gnp'add
+
+gg/\d\+ . \d\+gn"nd<C-R>=<C-R>n<CR><esc>
+
+:%s/ \+$//<CR>
+
+gg/.\+: \+\D\€kb€kbd\+$ma$yaw0*gnp'add
