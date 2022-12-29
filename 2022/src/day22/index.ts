@@ -43,6 +43,7 @@ const findStartingPoint = (map: string[][]): Position => {
 const getNextSquare = (
   pos: Position,
   map: string[][],
+  part: 1 | 2,
 ): { pos: Position; square: string } => {
   const r_step = pos.facing === Facing.D ? 1 : pos.facing === Facing.U ? -1 : 0
   const c_step = pos.facing === Facing.R ? 1 : pos.facing === Facing.L ? -1 : 0
@@ -52,13 +53,84 @@ const getNextSquare = (
     c: pos.c + c_step,
     facing: pos.facing,
   }
+
+  const wrapFunc = part === 1 ? wrapAround : wrapAroundCube
+
+
   if (map[nextSquare.r][nextSquare.c] === " ") {
-    console.log("Wrap around:", nextSquare)
-    nextSquare = wrapAround(nextSquare, map)
-    console.log("After wrap:", nextSquare)
+    nextSquare = wrapFunc(nextSquare, map)
   }
 
   return { pos: nextSquare, square: map[nextSquare.r][nextSquare.c] }
+}
+
+const wrapAroundCube = (pos: Position, map: string[][]): Position => {
+  let c: number = pos.c
+  let r: number = pos.r
+  // console.log("map length:", map.length)
+  const faceSize = (map.length - 2) / 3
+  switch (pos.facing) {
+    case Facing.U:
+      r += 1
+      // Top of A
+      if (r === 1) {
+        return { r: faceSize + 1, c: 3 * faceSize - c + 1, facing: Facing.D }
+      }
+      // Top of left arm
+      if (r === faceSize + 1 && c <= faceSize) {
+        return { r: 0, c: 3 * faceSize + 1 - c, facing: Facing.D }
+      }
+      // Top of left arm - second square
+      if (r === faceSize + 1 && c > faceSize && c <= 2 * faceSize) {
+        return { r: c - faceSize, c: 2 * faceSize + 1, facing: Facing.R }
+      }
+      if (r === 2 * faceSize + 1) {
+        return { r: 5 * faceSize - c + 1, c: faceSize * 3, facing: Facing.L }
+      }
+      console.log(r, ",", c)
+      throw new Error("can't wrap U")
+    case Facing.D:
+      r -= 1
+      if (r === 2 * faceSize && c <= faceSize) {
+        return { r: 3 * faceSize, c: 3 * faceSize + 1 - c, facing: Facing.U}
+      }
+      if (r === 2 * faceSize && c > faceSize && c <= 2 * faceSize) {
+        return { r: 4 * faceSize - c + 1, c: 2 * faceSize + 1, facing: Facing.R}
+      }
+      if (r === 3 * faceSize && c > 2 * faceSize && c <= 3 * faceSize) {
+        return { r: 2 * faceSize, c: 3 * faceSize - c + 1, facing: Facing.U}
+      }
+      if (r === 3 * faceSize && c > 3 * faceSize && c <= 4 * faceSize) {
+        return { r: 5 * faceSize - c + 1, c: 1, facing: Facing.R}
+      }
+      throw new Error("can't wrap D")
+    case Facing.R:
+      c -= 1
+      if (c === 3 * faceSize && r <= faceSize) {
+        return { r: 3 * faceSize + 1 - r, c: 4 * faceSize, facing: Facing.L}
+      }
+      if (c === 3 * faceSize && r > faceSize && r <= 2 * faceSize) {
+        return { r: 2 * faceSize + 1, c: 5 * faceSize + 1 - r, facing: Facing.D}
+      }
+      if (c === 4 * faceSize && r > 2 * faceSize && r <= 3 * faceSize) {
+        return { r: 3 * faceSize - r + 1, c: 3 * faceSize, facing: Facing.L}
+      }
+      throw new Error("can't wrap R")
+    case Facing.L:
+      c += 1
+      if (c === 2 * faceSize + 1 && r <= faceSize) {
+        return { r: faceSize + 1, c: faceSize + r, facing: Facing.D}
+      }
+      if (c === 1 && r > faceSize && r <= 2 * faceSize) {
+        return { r: 3 * faceSize, c: 5 * faceSize + 1 - r, facing: Facing.U}
+      }
+      if (c === 2 * faceSize + 1 && r > 2 * faceSize && r <= 3 * faceSize) {
+        return { r: 2 * faceSize, c: 4 * faceSize + 1 - r, facing: Facing.U}
+      }
+
+      throw new Error("can't wrap L")
+  }
+  return { r, c, facing: pos.facing }
 }
 
 const wrapAround = (pos: Position, map: string[][]): Position => {
@@ -100,6 +172,7 @@ const nextPosition = (
   dir: string,
   pos: Position,
   map: string[][],
+  part: 1 | 2 = 1
 ): Position => {
   if (dir === "R" || dir === "L") {
     return { ...pos, facing: turn(pos.facing, dir) }
@@ -111,23 +184,25 @@ const nextPosition = (
 
     let currR = pos.r
     let currC = pos.c
+    let currF = pos.facing
 
     loop: for (let i = 0; i < steps; i++) {
       const { pos: nextPos, square: nextSquare } = getNextSquare(
-        { r: currR, c: currC, facing: pos.facing },
+        { r: currR, c: currC, facing: currF },
         map,
+        part
       )
-      console.log("nextPost:", nextPos, "nextSquare:", nextSquare)
       switch (nextSquare) {
         case ".":
           currR = nextPos.r
           currC = nextPos.c
+          currF = nextPos.facing
           break
         case "#":
           break loop
       }
     }
-    return { r: currR, c: currC, facing: pos.facing }
+    return { r: currR, c: currC, facing: currF }
   }
 }
 
@@ -138,34 +213,24 @@ const mapToStr = (map: string[][]): string => {
 const part1 = (rawInput: string) => {
   const { map, dirs } = parseInput(rawInput)
   let pos = findStartingPoint(map)
-  // console.log(dirs)
-  // console.log(mapToStr(map))
 
-  // console.log(pos)
   dirs.forEach(dir => {
     pos = nextPosition(dir, pos, map)
-    // console.log(pos)
   })
 
   return 1000 * pos.r + 4 * pos.c + pos.facing
 }
-/*
-  *To finish providing the password to this strange input device, you need to
-determine numbers for your final row, column, and facing as your final position
-  appears from the perspective of the original map. Rows start from 1 at the
-top and count downward; columns start from 1 at the left and count rightward.
-  (In the above example, row 1, column 1 refers to the empty space with no tile
-   on it in the top-left corner.) Facing is 0 for right (>), 1 for down (v), 2
-     for left (<), and 3 for up (^). The final password is the sum of 1000
-       times the row, 4 times the column, and the facing.
-
-In the above example, the final row is 6, the final column is 8, and the final
-   facing is 0. So, the final password is 1000 * 6 + 4 * 8 + 0: 6032.
-  */
 const part2 = (rawInput: string) => {
-  const input = parseInput(rawInput)
+  const { map, dirs } = parseInput(rawInput)
+  let pos = findStartingPoint(map)
 
-  return
+  dirs.forEach(dir => {
+    pos = nextPosition(dir, pos, map, 2)
+  })
+
+  console.log(pos)
+
+  return 1000 * pos.r + 4 * pos.c + pos.facing
 }
 
 run({
@@ -193,10 +258,23 @@ run({
   },
   part2: {
     tests: [
-      // {
-      //   input: ``,
-      //   expected: "",
-      // },
+      {
+        input: `        ...#
+        .#..
+        #...
+        ....
+...#.......#
+........#...
+..#....#....
+..........#.
+        ...#....
+        .....#..
+        .#......
+        ......#.
+
+10R5L5R10L4R5L5`,
+        expected: 5031,
+      },
     ],
     solution: part2,
   },
