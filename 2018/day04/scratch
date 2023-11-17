@@ -1,0 +1,42 @@
+%{event: {:start_shift, ["3529"]}, timestamp: ~U[1518-03-18 00:03:00Z]}
+%{event: :wake, timestamp: ~U[1518-04-26 00:55:00Z]}
+%{event: :wake, timestamp: ~U[1518-04-30 00:46:00Z]}
+%{event: {:start_shift, ["2011"]}, timestamp: ~U[1518-10-28 00:01:00Z]}
+%{event: :wake, timestamp: ~U[1518-03-27 00:58:00Z]}
+%{event: :wake, timestamp: ~U[1518-05-14 00:36:00Z]}
+%{event: :sleep, timestamp: ~U[1518-04-08 00:18:00Z]}
+%{event: {:start_shift, ["2011"]}, timestamp: ~U[1518-09-20 23:59:00Z]}
+%{event: :wake, timestamp: ~U[1518-07-30 00:27:00Z]}
+%{event: :sleep, timestamp: ~U[1518-04-22 00:56:00Z]}
+%{event: {:start_shift, ["509"]}, timestamp: ~U[1518-06-25 00:00:00Z]}
+%{event: :sleep, timestamp: ~U[1518-07-04 00:22:00Z]}
+%{event: :sleep, timestamp: ~U[1518-08-05 00:39:00Z]}
+%{event: :sleep, timestamp: ~U[1518-04-13 00:09:00Z]}
+%{event: :wake, timestamp: ~U[1518-06-13 00:56:00Z]}
+%{event: :sleep, timestamp: ~U[1518-07-02 00:40:00Z]}
+%{event: :sleep, timestamp: ~U[1518-09-02 00:07:00Z]}
+%{event: {:start_shift, ["2179"]}, timestamp: ~U[1518-07-23 23:59:00Z]}
+%{event: :sleep, timestamp: ~U[1518-10-03 00:42:00Z]}
+%{event: :wake, timestamp: ~U[1518-11-17 00:32:00Z]}
+
+%{event: :sleep, timestamp: ~U[1518-09-02 00:07:00Z]}
+%{event: :sleep, timestamp: ~U[1518-07-02 00:40:00Z]}
+%{event: :sleep, timestamp: ~U[1518-10-03 00:42:00Z]}
+%{event: :sleep, timestamp: ~U[1518-07-04 00:22:00Z]}
+%{event: :sleep, timestamp: ~U[1518-08-05 00:39:00Z]}
+%{event: :sleep, timestamp: ~U[1518-04-08 00:18:00Z]}
+%{event: :sleep, timestamp: ~U[1518-04-13 00:09:00Z]}
+%{event: :wake, timestamp: ~U[1518-06-13 00:56:00Z]}
+%{event: :wake, timestamp: ~U[1518-05-14 00:36:00Z]}
+%{event: :wake, timestamp: ~U[1518-11-17 00:32:00Z]}
+%{event: {:start_shift, ["3529"]}, timestamp: ~U[1518-03-18 00:03:00Z]}
+%{event: {:start_shift, ["2011"]}, timestamp: ~U[1518-09-20 23:59:00Z]}
+%{event: :sleep, timestamp: ~U[1518-04-22 00:56:00Z]}
+%{event: {:start_shift, ["2179"]}, timestamp: ~U[1518-07-23 23:59:00Z]}
+%{event: {:start_shift, ["509"]}, timestamp: ~U[1518-06-25 00:00:00Z]}
+%{event: :wake, timestamp: ~U[1518-04-26 00:55:00Z]}
+%{event: :wake, timestamp: ~U[1518-03-27 00:58:00Z]}
+%{event: {:start_shift, ["2011"]}, timestamp: ~U[1518-10-28 00:01:00Z]}
+%{event: :wake, timestamp: ~U[1518-07-30 00:27:00Z]}
+%{event: :wake, timestamp: ~U[1518-04-30 00:46:00Z]}
+
