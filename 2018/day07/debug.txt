@@ -1,0 +1,1628 @@
+Compiling 1 file (.ex)
+%{
+  available_jobs: ["O", "P"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "",
+  job_queue: %{
+    "A" => ["C", "Z"],
+    "B" => ["W", "X", "U", "H", "A", "D"],
+    "C" => ["O"],
+    "D" => ["W"],
+    "E" => ["U"],
+    "F" => ["E", "C"],
+    "G" => ["R", "H", "P"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "U", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R", "U"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["P", "H"],
+    "S" => ["M", "D", "G", "Q", "T", "C", "V", "O", "P", "K"],
+    "T" => ["C", "R", "A", "I"],
+    "U" => ["P"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["U", "H", "E", "O"],
+    "X" => ["P"],
+    "Y" => ["C", "I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 0
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"O" => 75, "P" => 76},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "",
+  job_queue: %{
+    "A" => ["C", "Z"],
+    "B" => ["W", "X", "U", "H", "A", "D"],
+    "C" => ["O"],
+    "D" => ["W"],
+    "E" => ["U"],
+    "F" => ["E", "C"],
+    "G" => ["R", "H", "P"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "U", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R", "U"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["P", "H"],
+    "S" => ["M", "D", "G", "Q", "T", "C", "V", "O", "P", "K"],
+    "T" => ["C", "R", "A", "I"],
+    "U" => ["P"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["U", "H", "E", "O"],
+    "X" => ["P"],
+    "Y" => ["C", "I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 0
+}
+---
+%{
+  available_jobs: ["C"],
+  busy_workers: %{"P" => 76},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "O",
+  job_queue: %{
+    "A" => ["C", "Z"],
+    "B" => ["W", "X", "U", "H", "A", "D"],
+    "D" => ["W"],
+    "E" => ["U"],
+    "F" => ["E", "C"],
+    "G" => ["R", "H", "P"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "U", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R", "U"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["P", "H"],
+    "S" => ["M", "D", "G", "Q", "T", "C", "V", "P", "K"],
+    "T" => ["C", "R", "A", "I"],
+    "U" => ["P"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["U", "H", "E"],
+    "X" => ["P"],
+    "Y" => ["C", "I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 75
+}
+-----------------------
+%{
+  available_jobs: ["C"],
+  busy_workers: %{"P" => 76},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "O",
+  job_queue: %{
+    "A" => ["C", "Z"],
+    "B" => ["W", "X", "U", "H", "A", "D"],
+    "D" => ["W"],
+    "E" => ["U"],
+    "F" => ["E", "C"],
+    "G" => ["R", "H", "P"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "U", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R", "U"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["P", "H"],
+    "S" => ["M", "D", "G", "Q", "T", "C", "V", "P", "K"],
+    "T" => ["C", "R", "A", "I"],
+    "U" => ["P"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["U", "H", "E"],
+    "X" => ["P"],
+    "Y" => ["C", "I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 75
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"C" => 138, "P" => 76},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "O",
+  job_queue: %{
+    "A" => ["C", "Z"],
+    "B" => ["W", "X", "U", "H", "A", "D"],
+    "D" => ["W"],
+    "E" => ["U"],
+    "F" => ["E", "C"],
+    "G" => ["R", "H", "P"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "U", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R", "U"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["P", "H"],
+    "S" => ["M", "D", "G", "Q", "T", "C", "V", "P", "K"],
+    "T" => ["C", "R", "A", "I"],
+    "U" => ["P"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["U", "H", "E"],
+    "X" => ["P"],
+    "Y" => ["C", "I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 75
+}
+---
+%{
+  available_jobs: ["U", "X"],
+  busy_workers: %{"C" => 138},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OP",
+  job_queue: %{
+    "A" => ["C", "Z"],
+    "B" => ["W", "X", "U", "H", "A", "D"],
+    "D" => ["W"],
+    "E" => ["U"],
+    "F" => ["E", "C"],
+    "G" => ["R", "H"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "U", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R", "U"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "C", "V", "K"],
+    "T" => ["C", "R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["U", "H", "E"],
+    "Y" => ["C", "I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 76
+}
+-----------------------
+%{
+  available_jobs: ["U", "X"],
+  busy_workers: %{"C" => 138},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OP",
+  job_queue: %{
+    "A" => ["C", "Z"],
+    "B" => ["W", "X", "U", "H", "A", "D"],
+    "D" => ["W"],
+    "E" => ["U"],
+    "F" => ["E", "C"],
+    "G" => ["R", "H"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "U", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R", "U"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "C", "V", "K"],
+    "T" => ["C", "R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["U", "H", "E"],
+    "Y" => ["C", "I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 76
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"C" => 138, "U" => 157, "X" => 160},
+  free_workers: 2,
+  job_base_time: 60,
+  job_order: "OP",
+  job_queue: %{
+    "A" => ["C", "Z"],
+    "B" => ["W", "X", "U", "H", "A", "D"],
+    "D" => ["W"],
+    "E" => ["U"],
+    "F" => ["E", "C"],
+    "G" => ["R", "H"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "U", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R", "U"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "C", "V", "K"],
+    "T" => ["C", "R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["U", "H", "E"],
+    "Y" => ["C", "I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 76
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"U" => 157, "X" => 160},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPC",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "X", "U", "H", "A", "D"],
+    "D" => ["W"],
+    "E" => ["U"],
+    "F" => ["E"],
+    "G" => ["R", "H"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "U", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R", "U"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["U", "H", "E"],
+    "Y" => ["I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 138
+}
+-----------------------
+%{
+  available_jobs: [],
+  busy_workers: %{"U" => 157, "X" => 160},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPC",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "X", "U", "H", "A", "D"],
+    "D" => ["W"],
+    "E" => ["U"],
+    "F" => ["E"],
+    "G" => ["R", "H"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "U", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R", "U"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["U", "H", "E"],
+    "Y" => ["I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 138
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"U" => 157, "X" => 160},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPC",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "X", "U", "H", "A", "D"],
+    "D" => ["W"],
+    "E" => ["U"],
+    "F" => ["E"],
+    "G" => ["R", "H"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "U", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R", "U"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["U", "H", "E"],
+    "Y" => ["I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 138
+}
+---
+%{
+  available_jobs: ["E"],
+  busy_workers: %{"X" => 160},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCU",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "X", "H", "A", "D"],
+    "D" => ["W"],
+    "F" => ["E"],
+    "G" => ["R", "H"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["H", "E"],
+    "Y" => ["I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 157
+}
+-----------------------
+%{
+  available_jobs: ["E"],
+  busy_workers: %{"X" => 160},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCU",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "X", "H", "A", "D"],
+    "D" => ["W"],
+    "F" => ["E"],
+    "G" => ["R", "H"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["H", "E"],
+    "Y" => ["I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 157
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"E" => 222, "X" => 160},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCU",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "X", "H", "A", "D"],
+    "D" => ["W"],
+    "F" => ["E"],
+    "G" => ["R", "H"],
+    "H" => ["X"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G", "X"],
+    "W" => ["H", "E"],
+    "Y" => ["I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 157
+}
+---
+%{
+  available_jobs: ["H"],
+  busy_workers: %{"E" => 222},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUX",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "H", "A", "D"],
+    "D" => ["W"],
+    "F" => ["E"],
+    "G" => ["R", "H"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "W" => ["H", "E"],
+    "Y" => ["I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 160
+}
+-----------------------
+%{
+  available_jobs: ["H"],
+  busy_workers: %{"E" => 222},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUX",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "H", "A", "D"],
+    "D" => ["W"],
+    "F" => ["E"],
+    "G" => ["R", "H"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "W" => ["H", "E"],
+    "Y" => ["I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 160
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"E" => 222, "H" => 228},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUX",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "H", "A", "D"],
+    "D" => ["W"],
+    "F" => ["E"],
+    "G" => ["R", "H"],
+    "I" => ["E"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "W" => ["H", "E"],
+    "Y" => ["I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 160
+}
+---
+%{
+  available_jobs: ["F", "I"],
+  busy_workers: %{"H" => 228},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXE",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "H", "A", "D"],
+    "D" => ["W"],
+    "G" => ["R", "H"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "W" => ["H"],
+    "Y" => ["I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 222
+}
+-----------------------
+%{
+  available_jobs: ["F", "I"],
+  busy_workers: %{"H" => 228},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXE",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "H", "A", "D"],
+    "D" => ["W"],
+    "G" => ["R", "H"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "W" => ["H"],
+    "Y" => ["I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 222
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"F" => 288, "H" => 228, "I" => 291},
+  free_workers: 2,
+  job_base_time: 60,
+  job_order: "OPCUXE",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "H", "A", "D"],
+    "D" => ["W"],
+    "G" => ["R", "H"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "R" => ["H"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "W" => ["H"],
+    "Y" => ["I", "H", "T"],
+    "Z" => ["H"]
+  },
+  time: 222
+}
+---
+%{
+  available_jobs: ["R", "W", "Z"],
+  busy_workers: %{"F" => 288, "I" => 291},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEH",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "A", "D"],
+    "D" => ["W"],
+    "G" => ["R"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["I", "T"]
+  },
+  time: 228
+}
+-----------------------
+%{
+  available_jobs: ["R", "W", "Z"],
+  busy_workers: %{"F" => 288, "I" => 291},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEH",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "A", "D"],
+    "D" => ["W"],
+    "G" => ["R"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["I", "T"]
+  },
+  time: 228
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"F" => 288, "I" => 291, "R" => 306, "W" => 311, "Z" => 314},
+  free_workers: 0,
+  job_base_time: 60,
+  job_order: "OPCUXEH",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "A", "D"],
+    "D" => ["W"],
+    "G" => ["R"],
+    "J" => ["B", "Z", "A", "Q", "T", "F"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "F", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["I", "T"]
+  },
+  time: 228
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"I" => 291, "R" => 306, "W" => 311, "Z" => 314},
+  free_workers: 1,
+  job_base_time: 60,
+  job_order: "OPCUXEHF",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "A", "D"],
+    "D" => ["W"],
+    "G" => ["R"],
+    "J" => ["B", "Z", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["I", "T"]
+  },
+  time: 288
+}
+-----------------------
+%{
+  available_jobs: [],
+  busy_workers: %{"I" => 291, "R" => 306, "W" => 311, "Z" => 314},
+  free_workers: 1,
+  job_base_time: 60,
+  job_order: "OPCUXEHF",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "A", "D"],
+    "D" => ["W"],
+    "G" => ["R"],
+    "J" => ["B", "Z", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["I", "T"]
+  },
+  time: 288
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"I" => 291, "R" => 306, "W" => 311, "Z" => 314},
+  free_workers: 1,
+  job_base_time: 60,
+  job_order: "OPCUXEHF",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "A", "D"],
+    "D" => ["W"],
+    "G" => ["R"],
+    "J" => ["B", "Z", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "I", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "I", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "I", "T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A", "I"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["I", "T"]
+  },
+  time: 288
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"R" => 306, "W" => 311, "Z" => 314},
+  free_workers: 2,
+  job_base_time: 60,
+  job_order: "OPCUXEHFI",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "A", "D"],
+    "D" => ["W"],
+    "G" => ["R"],
+    "J" => ["B", "Z", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["T"]
+  },
+  time: 291
+}
+-----------------------
+%{
+  available_jobs: [],
+  busy_workers: %{"R" => 306, "W" => 311, "Z" => 314},
+  free_workers: 2,
+  job_base_time: 60,
+  job_order: "OPCUXEHFI",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "A", "D"],
+    "D" => ["W"],
+    "G" => ["R"],
+    "J" => ["B", "Z", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["T"]
+  },
+  time: 291
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"R" => 306, "W" => 311, "Z" => 314},
+  free_workers: 2,
+  job_base_time: 60,
+  job_order: "OPCUXEHFI",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "A", "D"],
+    "D" => ["W"],
+    "G" => ["R"],
+    "J" => ["B", "Z", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "W"],
+    "L" => ["R", "J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y", "R"],
+    "N" => ["D", "R", "G", "Y", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["R", "A"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["T"]
+  },
+  time: 291
+}
+---
+%{
+  available_jobs: ["G"],
+  busy_workers: %{"W" => 311, "Z" => 314},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIR",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "A", "D"],
+    "D" => ["W"],
+    "J" => ["B", "Z", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "W"],
+    "L" => ["J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y"],
+    "N" => ["D", "G", "Y", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["A"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["T"]
+  },
+  time: 306
+}
+-----------------------
+%{
+  available_jobs: ["G"],
+  busy_workers: %{"W" => 311, "Z" => 314},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIR",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "A", "D"],
+    "D" => ["W"],
+    "J" => ["B", "Z", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "W"],
+    "L" => ["J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y"],
+    "N" => ["D", "G", "Y", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["A"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["T"]
+  },
+  time: 306
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"G" => 373, "W" => 311, "Z" => 314},
+  free_workers: 2,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIR",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["W", "A", "D"],
+    "D" => ["W"],
+    "J" => ["B", "Z", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G", "W"],
+    "L" => ["J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["W", "Q", "D", "Y"],
+    "N" => ["D", "G", "Y", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["W", "T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["A"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["T"]
+  },
+  time: 306
+}
+---
+%{
+  available_jobs: ["D"],
+  busy_workers: %{"G" => 373, "Z" => 314},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRW",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["A", "D"],
+    "J" => ["B", "Z", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G"],
+    "L" => ["J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "D", "Y"],
+    "N" => ["D", "G", "Y", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["A"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["T"]
+  },
+  time: 311
+}
+-----------------------
+%{
+  available_jobs: ["D"],
+  busy_workers: %{"G" => 373, "Z" => 314},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRW",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["A", "D"],
+    "J" => ["B", "Z", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G"],
+    "L" => ["J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "D", "Y"],
+    "N" => ["D", "G", "Y", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["A"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["T"]
+  },
+  time: 311
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"D" => 375, "G" => 373, "Z" => 314},
+  free_workers: 2,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRW",
+  job_queue: %{
+    "A" => ["Z"],
+    "B" => ["A", "D"],
+    "J" => ["B", "Z", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Z", "Q", "J", "G"],
+    "L" => ["J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "D", "Y"],
+    "N" => ["D", "G", "Y", "M", "Z", "J", "Q", "B", "A"],
+    "Q" => ["T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["A"],
+    "V" => ["T", "Y", "J", "Z", "K", "A", "N", "M", "G"],
+    "Y" => ["T"]
+  },
+  time: 311
+}
+---
+%{
+  available_jobs: ["A"],
+  busy_workers: %{"D" => 375, "G" => 373},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZ",
+  job_queue: %{
+    "B" => ["A", "D"],
+    "J" => ["B", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Q", "J", "G"],
+    "L" => ["J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "D", "Y"],
+    "N" => ["D", "G", "Y", "M", "J", "Q", "B", "A"],
+    "Q" => ["T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["A"],
+    "V" => ["T", "Y", "J", "K", "A", "N", "M", "G"],
+    "Y" => ["T"]
+  },
+  time: 314
+}
+-----------------------
+%{
+  available_jobs: ["A"],
+  busy_workers: %{"D" => 375, "G" => 373},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZ",
+  job_queue: %{
+    "B" => ["A", "D"],
+    "J" => ["B", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Q", "J", "G"],
+    "L" => ["J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "D", "Y"],
+    "N" => ["D", "G", "Y", "M", "J", "Q", "B", "A"],
+    "Q" => ["T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["A"],
+    "V" => ["T", "Y", "J", "K", "A", "N", "M", "G"],
+    "Y" => ["T"]
+  },
+  time: 314
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"A" => 375, "D" => 375, "G" => 373},
+  free_workers: 2,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZ",
+  job_queue: %{
+    "B" => ["A", "D"],
+    "J" => ["B", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Q", "J", "G"],
+    "L" => ["J", "G", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "D", "Y"],
+    "N" => ["D", "G", "Y", "M", "J", "Q", "B", "A"],
+    "Q" => ["T", "A"],
+    "S" => ["M", "D", "G", "Q", "T", "V", "K"],
+    "T" => ["A"],
+    "V" => ["T", "Y", "J", "K", "A", "N", "M", "G"],
+    "Y" => ["T"]
+  },
+  time: 314
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"A" => 375, "D" => 375},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZG",
+  job_queue: %{
+    "B" => ["A", "D"],
+    "J" => ["B", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Q", "J"],
+    "L" => ["J", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "D", "Y"],
+    "N" => ["D", "Y", "M", "J", "Q", "B", "A"],
+    "Q" => ["T", "A"],
+    "S" => ["M", "D", "Q", "T", "V", "K"],
+    "T" => ["A"],
+    "V" => ["T", "Y", "J", "K", "A", "N", "M"],
+    "Y" => ["T"]
+  },
+  time: 373
+}
+-----------------------
+%{
+  available_jobs: [],
+  busy_workers: %{"A" => 375, "D" => 375},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZG",
+  job_queue: %{
+    "B" => ["A", "D"],
+    "J" => ["B", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Q", "J"],
+    "L" => ["J", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "D", "Y"],
+    "N" => ["D", "Y", "M", "J", "Q", "B", "A"],
+    "Q" => ["T", "A"],
+    "S" => ["M", "D", "Q", "T", "V", "K"],
+    "T" => ["A"],
+    "V" => ["T", "Y", "J", "K", "A", "N", "M"],
+    "Y" => ["T"]
+  },
+  time: 373
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"A" => 375, "D" => 375},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZG",
+  job_queue: %{
+    "B" => ["A", "D"],
+    "J" => ["B", "A", "Q", "T"],
+    "K" => ["M", "N", "B", "Q", "J"],
+    "L" => ["J", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "D", "Y"],
+    "N" => ["D", "Y", "M", "J", "Q", "B", "A"],
+    "Q" => ["T", "A"],
+    "S" => ["M", "D", "Q", "T", "V", "K"],
+    "T" => ["A"],
+    "V" => ["T", "Y", "J", "K", "A", "N", "M"],
+    "Y" => ["T"]
+  },
+  time: 373
+}
+---
+%{
+  available_jobs: ["B", "T"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGAD",
+  job_queue: %{
+    "J" => ["B", "Q", "T"],
+    "K" => ["M", "N", "B", "Q", "J"],
+    "L" => ["J", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "Y"],
+    "N" => ["Y", "M", "J", "Q", "B"],
+    "Q" => ["T"],
+    "S" => ["M", "Q", "T", "V", "K"],
+    "V" => ["T", "Y", "J", "K", "N", "M"],
+    "Y" => ["T"]
+  },
+  time: 375
+}
+-----------------------
+%{
+  available_jobs: ["B", "T"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGAD",
+  job_queue: %{
+    "J" => ["B", "Q", "T"],
+    "K" => ["M", "N", "B", "Q", "J"],
+    "L" => ["J", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "Y"],
+    "N" => ["Y", "M", "J", "Q", "B"],
+    "Q" => ["T"],
+    "S" => ["M", "Q", "T", "V", "K"],
+    "V" => ["T", "Y", "J", "K", "N", "M"],
+    "Y" => ["T"]
+  },
+  time: 375
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"B" => 437, "T" => 455},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGAD",
+  job_queue: %{
+    "J" => ["B", "Q", "T"],
+    "K" => ["M", "N", "B", "Q", "J"],
+    "L" => ["J", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "Y"],
+    "N" => ["Y", "M", "J", "Q", "B"],
+    "Q" => ["T"],
+    "S" => ["M", "Q", "T", "V", "K"],
+    "V" => ["T", "Y", "J", "K", "N", "M"],
+    "Y" => ["T"]
+  },
+  time: 375
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"T" => 455},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADB",
+  job_queue: %{
+    "J" => ["Q", "T"],
+    "K" => ["M", "N", "Q", "J"],
+    "L" => ["J", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "Y"],
+    "N" => ["Y", "M", "J", "Q"],
+    "Q" => ["T"],
+    "S" => ["M", "Q", "T", "V", "K"],
+    "V" => ["T", "Y", "J", "K", "N", "M"],
+    "Y" => ["T"]
+  },
+  time: 437
+}
+-----------------------
+%{
+  available_jobs: [],
+  busy_workers: %{"T" => 455},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADB",
+  job_queue: %{
+    "J" => ["Q", "T"],
+    "K" => ["M", "N", "Q", "J"],
+    "L" => ["J", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "Y"],
+    "N" => ["Y", "M", "J", "Q"],
+    "Q" => ["T"],
+    "S" => ["M", "Q", "T", "V", "K"],
+    "V" => ["T", "Y", "J", "K", "N", "M"],
+    "Y" => ["T"]
+  },
+  time: 437
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"T" => 455},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADB",
+  job_queue: %{
+    "J" => ["Q", "T"],
+    "K" => ["M", "N", "Q", "J"],
+    "L" => ["J", "T", "M", "N", "S", "V"],
+    "M" => ["Q", "Y"],
+    "N" => ["Y", "M", "J", "Q"],
+    "Q" => ["T"],
+    "S" => ["M", "Q", "T", "V", "K"],
+    "V" => ["T", "Y", "J", "K", "N", "M"],
+    "Y" => ["T"]
+  },
+  time: 437
+}
+---
+%{
+  available_jobs: ["Q", "Y"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBT",
+  job_queue: %{
+    "J" => ["Q"],
+    "K" => ["M", "N", "Q", "J"],
+    "L" => ["J", "M", "N", "S", "V"],
+    "M" => ["Q", "Y"],
+    "N" => ["Y", "M", "J", "Q"],
+    "S" => ["M", "Q", "V", "K"],
+    "V" => ["Y", "J", "K", "N", "M"]
+  },
+  time: 455
+}
+-----------------------
+%{
+  available_jobs: ["Q", "Y"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBT",
+  job_queue: %{
+    "J" => ["Q"],
+    "K" => ["M", "N", "Q", "J"],
+    "L" => ["J", "M", "N", "S", "V"],
+    "M" => ["Q", "Y"],
+    "N" => ["Y", "M", "J", "Q"],
+    "S" => ["M", "Q", "V", "K"],
+    "V" => ["Y", "J", "K", "N", "M"]
+  },
+  time: 455
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"Q" => 532, "Y" => 540},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBT",
+  job_queue: %{
+    "J" => ["Q"],
+    "K" => ["M", "N", "Q", "J"],
+    "L" => ["J", "M", "N", "S", "V"],
+    "M" => ["Q", "Y"],
+    "N" => ["Y", "M", "J", "Q"],
+    "S" => ["M", "Q", "V", "K"],
+    "V" => ["Y", "J", "K", "N", "M"]
+  },
+  time: 455
+}
+---
+%{
+  available_jobs: ["J"],
+  busy_workers: %{"Y" => 540},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQ",
+  job_queue: %{
+    "K" => ["M", "N", "J"],
+    "L" => ["J", "M", "N", "S", "V"],
+    "M" => ["Y"],
+    "N" => ["Y", "M", "J"],
+    "S" => ["M", "V", "K"],
+    "V" => ["Y", "J", "K", "N", "M"]
+  },
+  time: 532
+}
+-----------------------
+%{
+  available_jobs: ["J"],
+  busy_workers: %{"Y" => 540},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQ",
+  job_queue: %{
+    "K" => ["M", "N", "J"],
+    "L" => ["J", "M", "N", "S", "V"],
+    "M" => ["Y"],
+    "N" => ["Y", "M", "J"],
+    "S" => ["M", "V", "K"],
+    "V" => ["Y", "J", "K", "N", "M"]
+  },
+  time: 532
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"J" => 602, "Y" => 540},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQ",
+  job_queue: %{
+    "K" => ["M", "N", "J"],
+    "L" => ["J", "M", "N", "S", "V"],
+    "M" => ["Y"],
+    "N" => ["Y", "M", "J"],
+    "S" => ["M", "V", "K"],
+    "V" => ["Y", "J", "K", "N", "M"]
+  },
+  time: 532
+}
+---
+%{
+  available_jobs: ["M"],
+  busy_workers: %{"J" => 602},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQY",
+  job_queue: %{
+    "K" => ["M", "N", "J"],
+    "L" => ["J", "M", "N", "S", "V"],
+    "N" => ["M", "J"],
+    "S" => ["M", "V", "K"],
+    "V" => ["J", "K", "N", "M"]
+  },
+  time: 540
+}
+-----------------------
+%{
+  available_jobs: ["M"],
+  busy_workers: %{"J" => 602},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQY",
+  job_queue: %{
+    "K" => ["M", "N", "J"],
+    "L" => ["J", "M", "N", "S", "V"],
+    "N" => ["M", "J"],
+    "S" => ["M", "V", "K"],
+    "V" => ["J", "K", "N", "M"]
+  },
+  time: 540
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"J" => 602, "M" => 613},
+  free_workers: 3,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQY",
+  job_queue: %{
+    "K" => ["M", "N", "J"],
+    "L" => ["J", "M", "N", "S", "V"],
+    "N" => ["M", "J"],
+    "S" => ["M", "V", "K"],
+    "V" => ["J", "K", "N", "M"]
+  },
+  time: 540
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"M" => 613},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJ",
+  job_queue: %{
+    "K" => ["M", "N"],
+    "L" => ["M", "N", "S", "V"],
+    "N" => ["M"],
+    "S" => ["M", "V", "K"],
+    "V" => ["K", "N", "M"]
+  },
+  time: 602
+}
+-----------------------
+%{
+  available_jobs: [],
+  busy_workers: %{"M" => 613},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJ",
+  job_queue: %{
+    "K" => ["M", "N"],
+    "L" => ["M", "N", "S", "V"],
+    "N" => ["M"],
+    "S" => ["M", "V", "K"],
+    "V" => ["K", "N", "M"]
+  },
+  time: 602
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"M" => 613},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJ",
+  job_queue: %{
+    "K" => ["M", "N"],
+    "L" => ["M", "N", "S", "V"],
+    "N" => ["M"],
+    "S" => ["M", "V", "K"],
+    "V" => ["K", "N", "M"]
+  },
+  time: 602
+}
+---
+%{
+  available_jobs: ["N"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJM",
+  job_queue: %{
+    "K" => ["N"],
+    "L" => ["N", "S", "V"],
+    "S" => ["V", "K"],
+    "V" => ["K", "N"]
+  },
+  time: 613
+}
+-----------------------
+%{
+  available_jobs: ["N"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJM",
+  job_queue: %{
+    "K" => ["N"],
+    "L" => ["N", "S", "V"],
+    "S" => ["V", "K"],
+    "V" => ["K", "N"]
+  },
+  time: 613
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"N" => 687},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJM",
+  job_queue: %{
+    "K" => ["N"],
+    "L" => ["N", "S", "V"],
+    "S" => ["V", "K"],
+    "V" => ["K", "N"]
+  },
+  time: 613
+}
+---
+%{
+  available_jobs: ["K"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJMN",
+  job_queue: %{"L" => ["S", "V"], "S" => ["V", "K"], "V" => ["K"]},
+  time: 687
+}
+-----------------------
+%{
+  available_jobs: ["K"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJMN",
+  job_queue: %{"L" => ["S", "V"], "S" => ["V", "K"], "V" => ["K"]},
+  time: 687
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"K" => 758},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJMN",
+  job_queue: %{"L" => ["S", "V"], "S" => ["V", "K"], "V" => ["K"]},
+  time: 687
+}
+---
+%{
+  available_jobs: ["V"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJMNK",
+  job_queue: %{"L" => ["S", "V"], "S" => ["V"]},
+  time: 758
+}
+-----------------------
+%{
+  available_jobs: ["V"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJMNK",
+  job_queue: %{"L" => ["S", "V"], "S" => ["V"]},
+  time: 758
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"V" => 840},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJMNK",
+  job_queue: %{"L" => ["S", "V"], "S" => ["V"]},
+  time: 758
+}
+---
+%{
+  available_jobs: ["S"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJMNKV",
+  job_queue: %{"L" => ["S"]},
+  time: 840
+}
+-----------------------
+%{
+  available_jobs: ["S"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJMNKV",
+  job_queue: %{"L" => ["S"]},
+  time: 840
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"S" => 919},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJMNKV",
+  job_queue: %{"L" => ["S"]},
+  time: 840
+}
+---
+%{
+  available_jobs: ["L"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJMNKVS",
+  job_queue: %{},
+  time: 919
+}
+-----------------------
+%{
+  available_jobs: ["L"],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJMNKVS",
+  job_queue: %{},
+  time: 919
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{"L" => 991},
+  free_workers: 4,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJMNKVS",
+  job_queue: %{},
+  time: 919
+}
+---
+%{
+  available_jobs: [],
+  busy_workers: %{},
+  free_workers: 5,
+  job_base_time: 60,
+  job_order: "OPCUXEHFIRWZGADBTQYJMNKVSL",
+  job_queue: %{},
+  time: 991
+}
+-----------------------
+"OPCUXEHFIRWZGADBTQYJMNKVSL"
+

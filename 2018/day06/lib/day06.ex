@@ -23,11 +23,26 @@ defmodule Day06 do
     |> Enum.map(&Point.from_string/1)
   end
 
-  def part1(lines) do
-    lines
+  def part1(points) do
+    filled_areas = points
     |> plot_on_grid
     |> fill_areas
+
+    # print_grid(filled_areas, points) |> IO.inspect
+
+    infinite_areas = filled_areas.squares
+    |> Enum.reduce(MapSet.new(), fn {%Point{x: x, y: y}, %{ dst: _, from: orig_pt }}, infinite_areas -> 
+      if x == filled_areas.min_x || y == filled_areas.min_y || x == filled_areas.max_x || y == filled_areas.max_y do
+        MapSet.put(infinite_areas, orig_pt)
+      else
+        infinite_areas
+      end
+    end)
+
+    
+    filled_areas
     |> area_sizes
+    |> Enum.filter(&(!MapSet.member?(infinite_areas, &1)))
     # |> Enum.max_by(&elem(&1, 1))
   end
 
@@ -35,6 +50,8 @@ defmodule Day06 do
     points
     |> Enum.reduce(%Grid{}, fn pt, grid -> Grid.put(grid, pt, pt) end)
   end
+
+  # def filter_infinite(grid)
 
   @doc """
   Need:
@@ -91,6 +108,10 @@ defmodule Day06 do
     |> Enum.map(&(&1.from))
     |> Enum.filter(&(&1 != :equidistant))
     |> Enum.frequencies
+  end
+
+  def print_grid(grid, orig_pts) do
+    pt_map = orig_pts |> Enum.with_index(fn elem, idx -> <<idx + 65>> end)
   end
 
 
