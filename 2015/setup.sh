@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ -f '.session' ]] || exit 1
+[[ -f '../.session' ]] || exit 1
 [[ $1 -gt 0 ]] && [[ $1 -lt 26 ]] || exit 1
 
 # Create directory if not there already
@@ -12,7 +12,7 @@ mkdir -p $dir
 
 # Download input
 if ! [[ -f $dir/input ]]; then
-  curl "https://adventofcode.com/2015/day/$1/input" -H "cookie: session=$(cat .session)" -o $dir/input
+  curl "https://adventofcode.com/2015/day/$1/input" -H "cookie: session=$(cat ../.session)" -o $dir/input
 fi
 
 cd $dir
