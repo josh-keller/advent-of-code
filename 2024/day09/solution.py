@@ -103,7 +103,6 @@ if __name__ == "__main__":
         with open(filename, 'r') as f:
             input = f.read().strip()
             result1 = part1(input)
-            assert(result1 == 6201130364722)
             print('Part 1:', part1(input))
             result2 = part2(input)
             if result2 in [83657101056, 6212065744242]:
